@@ -1,3 +1,7 @@
+using System.Configuration;
+using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace IkinciElAracIhaleSistemiSonKullanici.UI
 {
     public class Program
@@ -8,6 +12,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
 
             var app = builder.Build();
 

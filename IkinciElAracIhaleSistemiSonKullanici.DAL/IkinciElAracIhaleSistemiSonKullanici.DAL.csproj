@@ -6,4 +6,37 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemiSonKullanici.AppCore\IkinciElAracIhaleSistemiSonKullanici.AppCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IkinciElAracIhaleSistemi.Entities">
+      <HintPath>..\..\IkinciElAracIhaleSistemi\IkinciElAracIhaleSistemi.Entities\bin\Debug\IkinciElAracIhaleSistemi.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.Core">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.Data">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.EF">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.EF.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

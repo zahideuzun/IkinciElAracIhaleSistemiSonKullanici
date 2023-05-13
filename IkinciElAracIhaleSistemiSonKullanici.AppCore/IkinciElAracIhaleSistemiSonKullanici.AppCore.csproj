@@ -7,7 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <Reference Include="IkinciElAracIhaleSistemi.Entities">
+      <HintPath>..\..\IkinciElAracIhaleSistemi\IkinciElAracIhaleSistemi.Entities\bin\Debug\IkinciElAracIhaleSistemi.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.Core">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.Data">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.EF">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.EF.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
