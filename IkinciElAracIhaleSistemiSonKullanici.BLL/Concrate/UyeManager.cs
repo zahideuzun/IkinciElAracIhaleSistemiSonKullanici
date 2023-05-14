@@ -4,6 +4,7 @@ using IkinciElAracIhaleSistemiSonKullanici.AppCore.Enums;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
+using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
 
 
@@ -12,17 +13,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
     public class UyeManager : IUyeManager
     {
         private readonly AracIhaleContext _context;
+        
         public UyeManager(AracIhaleContext context)
         {
             _context = context;
         }
         public async Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye)
         {
+            
             var girisYapanUye = (from uy in _context.Uye 
                 join ut in _context.UyeTuru on  uy.UyeTuruId equals ut.UyeTuruId
-                    join bu in _context.BireyselUye on uy.Id equals bu.UyeId
-                    join ku in _context.KurumsalUye on uy.Id equals ku.UyeId
-            where (uy.Email == uye.Mail && uy.Sifre == uye.Sifre)
+                where (uy.Email == uye.Mail && uy.Sifre == uye.Sifre)
                     select new UyeSessionDTO()
                     {
                         Isim = uy.Isim,
@@ -30,6 +31,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
                         UyeTuru = uy.UyeTuru.UyeTuruAdi,
                         RolId = uy.UyeTuruId == (int)UyeTurleri.Bireysel ? (int)UyeRolleri.Bireysel : (int)UyeRolleri.Kurumsal,
                     }).SingleOrDefault();
+            
 
             return girisYapanUye;
         }

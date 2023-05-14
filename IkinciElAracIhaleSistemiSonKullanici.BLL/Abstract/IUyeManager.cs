@@ -11,6 +11,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
     public interface IUyeManager
     {
         public Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye);
-
+        public Task<List<UyeYetkiDTO>> RoleGoreSayfaYetkileriniGetir(int uyeRol);
     }
 }

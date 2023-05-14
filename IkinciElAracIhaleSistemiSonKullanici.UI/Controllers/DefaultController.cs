@@ -6,9 +6,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 {
     public class DefaultController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var sessiondakiUyeBilgisi = HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
             return View();
         }
     }

@@ -1,7 +1,4 @@
 ﻿
-@{
-	Layout = null;
-}
 <!doctype html>
 <html lang="zxx">
 
@@ -11,7 +8,7 @@
 
 @RenderBody()
 
-@await Html.PartialAsync("/Views/LayoutPartial/_FooterPartial.cshtml")
+@await Html.PartialAsync("~/Views/LayoutPartial/_FooterPartial.cshtml")
 
 @await Html.PartialAsync("/Views/LayoutPartial/_ScriptsPartial.cshtml")
 

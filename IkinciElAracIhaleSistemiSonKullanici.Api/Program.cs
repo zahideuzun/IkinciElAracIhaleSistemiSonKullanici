@@ -17,7 +17,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.AddScoped<IUyeManager, UyeManager>();
+            builder.Services.AddScoped<IIhaleManager, IhaleManager>();
+
             builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
+           
             builder.Services.AddSwaggerGen(a =>
             {
                 a.SwaggerDoc("v1", new OpenApiInfo() { Title = "AracIhale", Version = "v1" });

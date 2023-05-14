@@ -34,5 +34,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Context
         public DbSet<KurumsalUye> KurumsalUye { get; set; }
         public DbSet<RolYetki> RolYetki { get; set; }
         public DbSet<Sayfa> Sayfa { get; set; }
+        public DbSet<Ihale> Ihale { get; set; }
+        public DbSet<IhaleTuru> IhaleTuru { get; set; }
+        public DbSet<IhaleStatu> IhaleStatu { get; set; }
+        public DbSet<Statu> Statu { get; set; }
     }
 }

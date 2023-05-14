@@ -1,4 +1,5 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
 using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
 using Microsoft.AspNetCore.Mvc;
@@ -23,18 +24,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UyeGirisDTO uye)
         {
-            if (!ModelState.IsValid && uye==null)
+            if (!ModelState.IsValid && uye == null)
             {
-                RedirectToAction("Index", "Giris");
+                return RedirectToAction("Index", "Giris");
             }
-            else
-            {
-                var girisYapanUye = await _provider.KullaniciGirisKontrolTask(uye);
-                HttpContext.Session.MySessionSet("girisYapanUye", girisYapanUye);
-                RedirectToAction("Index", "Default");
-            }
-            return View();
-            
+
+            var girisYapanUye = await _provider.KullaniciGirisKontrolTask(uye);
+            HttpContext.Session.MySessionSet("girisYapanUye", girisYapanUye.Data);
+            var sessiondakiUyeBilgisi = HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
+
+            return RedirectToAction("Index", "LayoutPartial");
+
         }
     }
 }

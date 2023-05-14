@@ -20,7 +20,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
             {
                 x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
             });
+            builder.Services.AddHttpClient<IhaleProvider>(x =>
+            {
+                x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+            });
 
+            builder.Services.AddScoped<IIhaleManager, IhaleManager>();
             builder.Services.AddScoped<IUyeManager, UyeManager>();
 
             builder.Services.AddSession(options =>
@@ -30,6 +35,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
                 options.Cookie.IsEssential = true;
             });
 
+            builder.Services.AddHttpContextAccessor();
 
 
             var app = builder.Build();

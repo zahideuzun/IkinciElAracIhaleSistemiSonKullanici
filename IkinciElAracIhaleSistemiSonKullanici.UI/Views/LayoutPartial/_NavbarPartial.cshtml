@@ -1,11 +1,15 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs
+@using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
+@using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
+@using IkinciElAracIhaleSistemiSonKullanici.DAL.Context
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 @{
-	
-
-	//List<RolSayfaVM> listMenu = new RolSayfaDAL().RoleGoreSayfaYetkileriniGetir((Session["girisYapanKullanici"] as KullaniciRolVM).RolId);
-	//ViewBag.Menu = listMenu;
-	//ViewBag.GirisYapanKullanici = kullanici;
+	var sessiondakiUyeBilgisi = HttpContextAccessor.HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
+	ViewBag.uye = sessiondakiUyeBilgisi;
+	//ViewBag.Menu =  RoleGoreSayfaYetkileriniGetir(sessiondakiUyeBilgisi.RolId);
+	//string isim = "zahide";
 }
 
 <header id="site-header" class="fixed-top">
@@ -23,32 +27,47 @@
             <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
                     data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                     aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+	            <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+	            <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+	            <span ></span>
             </button>
-
+            
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Default/Index/">Ana Sayfa <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">İhaleler</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Destination/Index/"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Guide/Index/">Rehberlerimiz</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Contact/Index/">İletişim</a>
-                    </li>
+	            <ul class="navbar-nav mr-auto">
+		            @{
+                        var task = (Task<List<UyeYetkiDTO>>)ViewBag.Menu;
+			            if (task != null)
+			            {
+				            var result = task.Result;
+				            foreach (var item in result)
+				            {
+					            <li class="nav-item">
+						            <a class="nav-link" href="@item.SayfaLink">@item.SayfaIsim</a>
+					            </li>
+				            }
+			            }
+                    }
 
-                </ul>
+		           @* <li class="nav-item">
+			            <a class="nav-link" href="/Default/Index/">Ana Sayfa <span class="sr-only">(current)</span></a>
+		            </li>
+		            <li class="nav-item">
+			            <a class="nav-link" href="about.html">İhaleler</a>
+		            </li>
+		            <li class="nav-item">
+			            <a class="nav-link" href="/Destination/Index/"></a>
+		            </li>
+		            <li class="nav-item">
+			            <a class="nav-link" href="/Guide/Index/">Rehberlerimiz</a>
+		            </li>
+		            <li class="nav-item">
+			            <a class="nav-link" href="/Contact/Index/">İletişim</a>
+		            </li>*@
+
+	            </ul>
             </div>
             <div class="d-lg-block d-none">
-                <a href="contact.html" class="btn btn-style btn-secondary">Profilim</a>
+                <a href="#" class="btn btn-style btn-secondary">Profilim</a>
             </div>
             <!-- toggle switch for light and dark theme -->
             <div class="mobile-position">

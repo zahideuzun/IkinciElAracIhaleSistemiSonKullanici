@@ -22,8 +22,11 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork
         {
             return new UyeRepository(Context);
         }
-       
-        
+        public IIhaleRepository GetIhaleRepository()
+        {
+            return new IhaleRepository(Context);
+        }
+
         public void MySaveChanges()
         {
             Context.SaveChanges();
