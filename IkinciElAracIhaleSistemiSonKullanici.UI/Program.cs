@@ -1,5 +1,8 @@
 using System.Configuration;
+using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
+using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
+using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
 using Microsoft.EntityFrameworkCore;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI
@@ -13,6 +16,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
+            builder.Services.AddHttpClient<GirisProvider>(x =>
+            {
+                x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+            });
+
+            builder.Services.AddScoped<IUyeManager, UyeManager>();
 
             var app = builder.Build();
 
@@ -29,7 +38,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Giris}/{action=Index}/{id?}");
 
             app.Run();
         }

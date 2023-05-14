@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using IkinciElAracIhaleSistemi.Entities.Entities;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Context
 {
@@ -20,5 +21,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Context
 
         }
 
+        public DbSet<Uye> Uyeler { get; set; }
+        public DbSet<UyeTuru> UyeTurleri { get; set; }
+        public DbSet<BireyselUye> BireyselUyeler { get; set; }
+        public DbSet<KurumsalUye> KurumsalUyeler { get; set; }
+        public DbSet<RolYetki> RolYetkileri { get; set; }
     }
 }

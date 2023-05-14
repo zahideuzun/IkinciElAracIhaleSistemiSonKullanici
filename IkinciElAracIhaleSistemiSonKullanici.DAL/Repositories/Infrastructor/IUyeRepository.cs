@@ -8,7 +8,7 @@ using IkinciElAracIhaleSistemiSonKullanici.Data;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor
 {
-    public interface IUyeRepository : ISelectableRepo<Uye>
+    public interface IUyeRepository : ISelectableRepo<Uye>, ISelectableRepoAsync<Uye>
     {
         
 

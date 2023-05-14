@@ -1,3 +1,6 @@
+using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
+using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate;
+
 namespace IkinciElAracIhaleSistemiSonKullanici.Api
 {
     public class Program
@@ -9,6 +12,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IUyeManager, UyeManager>();
 
             var app = builder.Build();
 

@@ -11,5 +11,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
     public interface IUyeManager
     {
         public Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye);
+
     }
 }

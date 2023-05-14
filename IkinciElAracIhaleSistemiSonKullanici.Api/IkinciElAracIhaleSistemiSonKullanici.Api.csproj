@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IkinciElAracIhaleSistemiSonKullanici.AppCore\IkinciElAracIhaleSistemiSonKullanici.AppCore.csproj" />
+    <ProjectReference Include="..\IkinciElAracIhaleSistemiSonKullanici.BLL\IkinciElAracIhaleSistemiSonKullanici.BLL.csproj" />
+    <ProjectReference Include="..\IkinciElAracIhaleSistemiSonKullanici.DAL\IkinciElAracIhaleSistemiSonKullanici.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
