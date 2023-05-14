@@ -18,7 +18,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
             _uyeManager = uyeManager;
             _mapper = mapper;
         }
-        [HttpPost("Giris")]
+        [HttpPost("Index")]
         public async Task<IActionResult> UyeGiris([FromBody] UyeGirisDTO uye)
         {
             if (!ModelState.IsValid && uye ==null)

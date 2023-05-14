@@ -21,10 +21,18 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Context
 
         }
 
-        public DbSet<Uye> Uyeler { get; set; }
-        public DbSet<UyeTuru> UyeTurleri { get; set; }
-        public DbSet<BireyselUye> BireyselUyeler { get; set; }
-        public DbSet<KurumsalUye> KurumsalUyeler { get; set; }
-        public DbSet<RolYetki> RolYetkileri { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RolYetki>()
+                .HasKey(x => new { x.RolId, x.SayfaId });
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<Uye> Uye { get; set; }
+        public DbSet<UyeTuru> UyeTuru { get; set; }
+        public DbSet<BireyselUye> BireyselUye { get; set; }
+        public DbSet<KurumsalUye> KurumsalUye { get; set; }
+        public DbSet<RolYetki> RolYetki { get; set; }
+        public DbSet<Sayfa> Sayfa { get; set; }
     }
 }

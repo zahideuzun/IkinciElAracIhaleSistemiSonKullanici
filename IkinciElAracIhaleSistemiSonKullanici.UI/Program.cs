@@ -23,6 +23,15 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 
             builder.Services.AddScoped<IUyeManager, UyeManager>();
 
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,7 +40,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

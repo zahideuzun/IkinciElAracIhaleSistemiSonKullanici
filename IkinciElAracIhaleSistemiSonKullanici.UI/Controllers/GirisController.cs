@@ -1,5 +1,6 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
+using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
@@ -13,6 +14,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
             _provider = provider;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Index(UyeGirisDTO uye)
         {
@@ -23,6 +30,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
             else
             {
                 var girisYapanUye = await _provider.KullaniciGirisKontrolTask(uye);
+                HttpContext.Session.MySessionSet("girisYapanUye", girisYapanUye);
                 RedirectToAction("Index", "Default");
             }
             return View();
