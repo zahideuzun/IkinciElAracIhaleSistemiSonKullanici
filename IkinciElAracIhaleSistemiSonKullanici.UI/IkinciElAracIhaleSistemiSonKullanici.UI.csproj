@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
@@ -15,6 +17,15 @@
     <ProjectReference Include="..\IkinciElAracIhaleSistemiSonKullanici.AppCore\IkinciElAracIhaleSistemiSonKullanici.AppCore.csproj" />
     <ProjectReference Include="..\IkinciElAracIhaleSistemiSonKullanici.BLL\IkinciElAracIhaleSistemiSonKullanici.BLL.csproj" />
     <ProjectReference Include="..\IkinciElAracIhaleSistemiSonKullanici.DAL\IkinciElAracIhaleSistemiSonKullanici.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.Data">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.EF">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.EF.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

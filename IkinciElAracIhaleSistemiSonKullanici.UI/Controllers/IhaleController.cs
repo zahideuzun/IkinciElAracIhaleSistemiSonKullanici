@@ -21,9 +21,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> IhaleDetay(int id)
         {
-            var idyeGoreGelenIhale = await _ihaleProvider.IdyeGoreIhaleGetir(id);
-            ViewBag.IhaleBilgisi = idyeGoreGelenIhale;
-            var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
+	        ViewBag.IhaleBilgisi = await _ihaleProvider.IdyeGoreIhaleGetir(id);
+	        ViewBag.IhaledekiAracinFiyatBilgisi = await _ihaleProvider.AracIdyeGoreIhaleFiyatlariniGetir(id);
+	        var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
 	        return View(ihaledekiAraclar);
         }
     }

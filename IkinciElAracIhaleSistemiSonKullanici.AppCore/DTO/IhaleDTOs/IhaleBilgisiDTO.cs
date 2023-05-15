@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
-    public class IhaleListesiDTO
+    public class IhaleBilgisiDTO
     {
         public int IhaleId { get; set; }
         public string IhaleAdi { get; set; }

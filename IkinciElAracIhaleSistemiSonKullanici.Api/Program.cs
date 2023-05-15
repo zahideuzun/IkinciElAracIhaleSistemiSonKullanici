@@ -1,6 +1,10 @@
+using AutoMapper;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
+using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived;
+using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -16,8 +20,15 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
 
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(typeof(Program));
-            builder.Services.AddScoped<IUyeManager, UyeManager>();
-            builder.Services.AddScoped<IIhaleManager, IhaleManager>();
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+	            mc.AddProfile(new MapProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+			builder.Services.AddScoped<IUyeManager, UyeManager>();
+            builder.Services.AddScoped<IIhaleRepository, IhaleRepository>();
+			builder.Services.AddScoped<IIhaleManager, IhaleManager>();
 
             builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
            
@@ -27,6 +38,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
             });
 
             var app = builder.Build();
+
+            
 
             // Configure the HTTP request pipeline.
 

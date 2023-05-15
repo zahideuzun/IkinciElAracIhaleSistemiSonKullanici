@@ -27,7 +27,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork
             return new IhaleRepository(Context);
         }
 
-        public void MySaveChanges()
+        public IAracTeklifRepository GetAracTeklifRepository()
+        {
+	        return new AracTeklifRepository(Context);
+        }
+
+		public void MySaveChanges()
         {
             Context.SaveChanges();
         }

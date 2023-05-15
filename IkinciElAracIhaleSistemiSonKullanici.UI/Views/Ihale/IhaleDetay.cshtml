@@ -40,7 +40,7 @@
 			                <div class="column text-lg-center">
 				                <p class="price-title">@item.Marka</p>
 				                <p class="price-title">@item.Model</p>
-				                <p class="price-title">@item.Km</p>
+				                <p class="price-title">@item.Km KM</p>
 			                </div>
 			                <div class="column price-number text-md-right">
 				                <h3 class="pricing">
@@ -62,9 +62,10 @@
 					            </button>
 				            </div>
 				            <div class="modal-body">
+					            <input type="hidden" name="ihaleId" value="@ViewBag.IhaledekiAracinFiyatBilgisi.IhaleId" />
 					            <p>Arac ID'si: <span id="aracId"></span></p>
 					            <form>
-						            
+
 						            <div class="form-group">
 							            <label for="fiyat">Teklif Fiyatı:</label>
 							            <input type="number" class="form-control" id="fiyat" name="fiyat" required>

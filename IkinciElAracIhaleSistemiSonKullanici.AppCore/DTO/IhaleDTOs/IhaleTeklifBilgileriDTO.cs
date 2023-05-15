@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
-	public class IhaleTeklifVermeDTO
+	public class IhaleTeklifBilgileriDTO
 	{
-		public int AracIhaleId { get; set; }
+		public int AracId { get; set; }
 		public int UyeId { get; set; }
 		public decimal TeklifEdilenFiyat { get; set; }
 		public DateTime TeklifTarihi { get; set; }

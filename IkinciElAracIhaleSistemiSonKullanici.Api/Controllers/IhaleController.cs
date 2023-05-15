@@ -1,11 +1,9 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
-using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     [ApiController]
     public class IhaleController : ControllerBase
     {
@@ -29,12 +27,13 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
         [HttpGet("IhaleAraclar/{Id}")]
         public async Task<IActionResult> IhaledekiAraclar(int id)
         {
-            var ihaleListesi = await _ihaleManager.IhaledekiAraclariGetir(id);
-            if (ihaleListesi == null)
-            {
-                return BadRequest();
-            }
-            return Ok(ihaleListesi);
+            //var ihaleListesi = await _ihaleManager.IhaledekiAraclariGetir(id);
+            //if (ihaleListesi == null)
+            //{
+            //    return BadRequest();
+            //}
+            //return Ok(ihaleListesi);
+            return Ok();
         }
 
         [HttpGet("{Id}")]
@@ -46,6 +45,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
                 return BadRequest();
             }
             return Ok(ihale);
+        }
+        [HttpGet("AracIhaleFiyat/{aracId}")]
+        public async Task<IActionResult> IhaledekiAracFiyatBilgileri(int aracId)
+        {
+            //var ihale = await _ihaleManager.IhaledekiAracBilgisiniGetir(aracId);
+            //if (ihale == null)
+            //{
+            //    return BadRequest();
+            //}
+            //return Ok(ihale);
+            return Ok();
         }
     }
 }

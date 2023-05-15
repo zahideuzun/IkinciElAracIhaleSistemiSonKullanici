@@ -40,5 +40,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Context
         public DbSet<Statu> Statu { get; set; }
         public DbSet<Arac> Arac { get; set; }
         public DbSet<AracStatu> AracStatu { get; set; }
+        public DbSet<AracIhale> AracIhale { get; set; }
+        public DbSet<AracTeklif> AracTeklif { get; set; }
+        public DbSet<Marka> Marka { get; set; }
+        public DbSet<Model> Model { get; set; }
     }
 }

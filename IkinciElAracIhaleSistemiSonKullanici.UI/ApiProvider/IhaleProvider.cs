@@ -15,13 +15,13 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
         {
             _httpClient = httpClient;
         }
-        public async Task<List<IhaleListesiDTO>?> IhaleListesiniGetir()
+        public async Task<List<IhaleBilgisiDTO>?> IhaleListesiniGetir()
         {
-            List<IhaleListesiDTO>? listem = null;
+            List<IhaleBilgisiDTO>? listem = null;
             var responseMessage = await _httpClient.GetAsync("Ihale/Index");
             if (responseMessage.IsSuccessStatusCode)
             {
-                listem = JsonConvert.DeserializeObject<List<IhaleListesiDTO>>(await responseMessage.Content.ReadAsStringAsync());
+                listem = JsonConvert.DeserializeObject<List<IhaleBilgisiDTO>>(await responseMessage.Content.ReadAsStringAsync());
             }
 
             return listem;
@@ -39,15 +39,25 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
             return listem;
         }
 
-        public async Task<IhaleListesiDTO?> IdyeGoreIhaleGetir(int id)
+        public async Task<IhaleBilgisiDTO?> IdyeGoreIhaleGetir(int id)
         {
-            IhaleListesiDTO? ihale = null;
+            IhaleBilgisiDTO? ihale = null;
             var responseMessage = await _httpClient.GetAsync($"Ihale/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
-                ihale = JsonConvert.DeserializeObject<IhaleListesiDTO>(await responseMessage.Content.ReadAsStringAsync());
+                ihale = JsonConvert.DeserializeObject<IhaleBilgisiDTO>(await responseMessage.Content.ReadAsStringAsync());
             }
             return ihale;
         }
-    }
+        public async Task<IhaledekiAracFiyatBilgisiDTO?> AracIdyeGoreIhaleFiyatlariniGetir(int aracId)
+        {
+	        IhaledekiAracFiyatBilgisiDTO? ihale = null;
+	        var responseMessage = await _httpClient.GetAsync($"Ihale/AracIhaleFiyat/{aracId}");
+	        if (responseMessage.IsSuccessStatusCode)
+	        {
+		        ihale = JsonConvert.DeserializeObject<IhaledekiAracFiyatBilgisiDTO>(await responseMessage.Content.ReadAsStringAsync());
+	        }
+	        return ihale;
+        }
+	}
 }
