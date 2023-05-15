@@ -2,16 +2,22 @@
 @{
     ViewData["Title"] = "IhaleDetay";
     Layout = "~/Views/Shared/_UiLayout.cshtml";
+
 }
 
 
 <section class="w3l-about-breadcrumb text-left">
 	<div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
 		<div class="container">
-			<h2 class="title">@(ViewBag.IhaleBilgisi.IhaleAdi)</h2>
+			<h2 class="title">@ViewBag.IhaleBilgisi.IhaleAdi</h2>
 			<ul class="breadcrumbs-custom-path mt-2">
-				<li><a href="#url">Home</a></li>
-				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Packages </li>
+				<h5>
+				<li><a href="#"> @ViewBag.IhaleBilgisi.Statu </a></li> </h5>
+				
+				<hr/>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @ViewBag.IhaleBilgisi.BaslangicTarihi.Date -> @ViewBag.IhaleBilgisi.BaslangicSaati </li>
+				<hr/>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Bitiş Tarihi: @ViewBag.IhaleBilgisi.BitisTarihi -> @ViewBag.IhaleBilgisi.BitisSaati </li>
 			</ul>
 		</div>
 	</div>
@@ -40,12 +46,36 @@
 				                <h3 class="pricing">
 					                <sup class="pri1">$</sup>25<sup class="pri">99</sup>
 				                </h3>
-				                <button class="btn btn-style btn-primary ml-lg-3">Teklif Ver</button>
+								<button class="btn btn-style btn-primary ml-lg-3" data-toggle="modal" data-target="#teklifModal" id="@item.AracId">Teklif Ver</button>
+
 			                </div>
 		                </div>
 	                </div>
                 }
-                
+	            <div class="modal fade" id="teklifModal" tabindex="-1" role="dialog" aria-labelledby="teklifModalLabel" aria-hidden="true">
+		            <div class="modal-dialog" role="document">
+			            <div class="modal-content">
+				            <div class="modal-header">
+					            <h5 class="modal-title" id="teklifModalLabel">Teklif Formu</h5>
+					            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						            <span aria-hidden="true">&times;</span>
+					            </button>
+				            </div>
+				            <div class="modal-body">
+					            <p>Arac ID'si: <span id="aracId"></span></p>
+					            <form>
+						            
+						            <div class="form-group">
+							            <label for="fiyat">Teklif Fiyatı:</label>
+							            <input type="number" class="form-control" id="fiyat" name="fiyat" required>
+						            </div>
+						            <button type="submit" class="btn btn-primary">Gönder</button>
+					            </form>
+				            </div>
+			            </div>
+		            </div>
+	            </div>
+
             </div>
             <!--/pricing-info-grids-->
         </div>

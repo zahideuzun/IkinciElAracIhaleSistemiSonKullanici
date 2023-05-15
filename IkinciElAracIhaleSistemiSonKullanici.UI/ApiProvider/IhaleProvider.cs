@@ -47,7 +47,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
             {
                 ihale = JsonConvert.DeserializeObject<IhaleListesiDTO>(await responseMessage.Content.ReadAsStringAsync());
             }
-
             return ihale;
         }
     }

@@ -21,6 +21,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
             _context = context;
         }
 
+        //todo ihale statu durumunu tarihe göre otomatik degistir
+
         public async Task<IhaleListesiDTO?> IdyeGoreIhaleGetir(int id)
         {
             var IdyeGoreIhale = (from ih in _context.Ihale
@@ -40,7 +42,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
             return IdyeGoreIhale;
         }
 
-        public async Task<List<IhaleAraclariDTO>> IhaledekiAraclariGetir(int id)
+		public Task<IhaledekiAracBilgisiDTO?> IhaledekiAracBilgisiniGetir(int id)
+		{
+			return null;
+		}
+
+		public async Task<List<IhaleAraclariDTO>> IhaledekiAraclariGetir(int id)
         {
             int ihaleyeAitUyeId = (_context.Ihale.FirstOrDefault(a => a.Id == id).UyeId);
             if (ihaleyeAitUyeId != null)

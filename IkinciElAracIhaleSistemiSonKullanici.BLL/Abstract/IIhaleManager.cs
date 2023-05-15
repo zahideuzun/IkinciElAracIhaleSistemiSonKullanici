@@ -15,5 +15,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
 
         public Task<IhaleListesiDTO?> IdyeGoreIhaleGetir(int id);
 
+        public Task<IhaledekiAracBilgisiDTO?> IhaledekiAracBilgisiniGetir(int id);
+
     }
 }

@@ -1,8 +1,5 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs
-@using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
-@using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
-@using IkinciElAracIhaleSistemiSonKullanici.DAL.Context
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -34,8 +31,17 @@
             
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 	            <ul class="navbar-nav mr-auto">
-		            @{
-                        var task = (Task<List<UyeYetkiDTO>>)ViewBag.Menu;
+		            <li class="nav-item">
+			            <a class="nav-link" href="/Default/Index">Ana Sayfa</a>
+		            </li>
+		            <li class="nav-item">
+			            <a class="nav-link" href="/Ihale/Index">İhaleler</a>
+		            </li>
+		            <li class="nav-item">
+			            <a class="nav-link" href="/Iletisim/Index">İletişim</a>
+		            </li>
+		           @* @{
+			            var task = (Task<List<UyeYetkiDTO>>)ViewBag.Menu;
 			            if (task != null)
 			            {
 				            var result = task.Result;
@@ -46,7 +52,7 @@
 					            </li>
 				            }
 			            }
-                    }
+		            }*@
 	            </ul>
             </div>
             <div class="d-lg-block d-none">

@@ -31,9 +31,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 
             var girisYapanUye = await _provider.KullaniciGirisKontrolTask(uye);
             HttpContext.Session.MySessionSet("girisYapanUye", girisYapanUye.Data);
+            //todo uye bilgilerini sessiondan alarak menuyu duzenle
             var sessiondakiUyeBilgisi = HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
 
-            return RedirectToAction("Index", "LayoutPartial");
+            return RedirectToAction("Index", "Default");
 
         }
     }

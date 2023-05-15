@@ -26,7 +26,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
             return Ok(ihaleListesi);
         }
 
-        [HttpGet("IhaleAraclar/{id}")]
+        [HttpGet("IhaleAraclar/{Id}")]
         public async Task<IActionResult> IhaledekiAraclar(int id)
         {
             var ihaleListesi = await _ihaleManager.IhaledekiAraclariGetir(id);
@@ -37,7 +37,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
             return Ok(ihaleListesi);
         }
 
-        [HttpGet("Ihale/{id}")]
+        [HttpGet("{Id}")]
         public async Task<IActionResult> IdyeGoreGelenIhale(int id)
         {
             var ihale = await _ihaleManager.IdyeGoreIhaleGetir(id);

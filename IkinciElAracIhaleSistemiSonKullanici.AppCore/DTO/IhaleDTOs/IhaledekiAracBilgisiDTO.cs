@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
-	public class IhaleAracTeklifVermeDTO
+	public class IhaledekiAracBilgisiDTO
 	{
 		public decimal IhaleBaslangicFiyati { get; set; }
 		public decimal MinimumAlimFiyati { get; set; }
