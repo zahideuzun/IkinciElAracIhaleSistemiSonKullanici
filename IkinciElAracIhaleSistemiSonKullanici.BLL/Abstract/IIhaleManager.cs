@@ -11,5 +11,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
     {
         public Task<List<IhaleListesiDTO>> TumIhaleleriGetir();
 
+        public Task<List<IhaleAraclariDTO>> IhaledekiAraclariGetir(int id);
+
+        public Task<IhaleListesiDTO?> IdyeGoreIhaleGetir(int id);
+
     }
 }

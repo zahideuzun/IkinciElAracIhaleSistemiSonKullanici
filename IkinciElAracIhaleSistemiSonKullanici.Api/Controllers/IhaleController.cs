@@ -25,5 +25,27 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
             }
             return Ok(ihaleListesi);
         }
+
+        [HttpGet("IhaleAraclar/{id}")]
+        public async Task<IActionResult> IhaledekiAraclar(int id)
+        {
+            var ihaleListesi = await _ihaleManager.IhaledekiAraclariGetir(id);
+            if (ihaleListesi == null)
+            {
+                return BadRequest();
+            }
+            return Ok(ihaleListesi);
+        }
+
+        [HttpGet("Ihale/{id}")]
+        public async Task<IActionResult> IdyeGoreGelenIhale(int id)
+        {
+            var ihale = await _ihaleManager.IdyeGoreIhaleGetir(id);
+            if (ihale == null)
+            {
+                return BadRequest();
+            }
+            return Ok(ihale);
+        }
     }
 }

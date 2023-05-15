@@ -26,5 +26,29 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 
             return listem;
         }
+
+        public async Task<List<IhaleAraclariDTO>?> IhaledekiAraclariGetir(int id)
+        {
+            List<IhaleAraclariDTO>? listem = null;
+            var responseMessage = await _httpClient.GetAsync($"Ihale/IhaleAraclar/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                listem = JsonConvert.DeserializeObject<List<IhaleAraclariDTO>>(await responseMessage.Content.ReadAsStringAsync());
+            }
+
+            return listem;
+        }
+
+        public async Task<IhaleListesiDTO?> IdyeGoreIhaleGetir(int id)
+        {
+            IhaleListesiDTO? ihale = null;
+            var responseMessage = await _httpClient.GetAsync($"Ihale/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                ihale = JsonConvert.DeserializeObject<IhaleListesiDTO>(await responseMessage.Content.ReadAsStringAsync());
+            }
+
+            return ihale;
+        }
     }
 }

@@ -38,5 +38,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Context
         public DbSet<IhaleTuru> IhaleTuru { get; set; }
         public DbSet<IhaleStatu> IhaleStatu { get; set; }
         public DbSet<Statu> Statu { get; set; }
+        public DbSet<Arac> Arac { get; set; }
+        public DbSet<AracStatu> AracStatu { get; set; }
     }
 }
