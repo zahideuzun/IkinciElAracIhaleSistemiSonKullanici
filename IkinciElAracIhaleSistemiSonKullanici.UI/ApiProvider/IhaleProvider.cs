@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using Newtonsoft.Json;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
@@ -27,18 +28,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
             return listem;
         }
 
-        public async Task<List<IhaleAraclariDTO>?> IhaledekiAraclariGetir(int id)
-        {
-            List<IhaleAraclariDTO>? listem = null;
-            var responseMessage = await _httpClient.GetAsync($"Ihale/IhaleAraclar/{id}");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                listem = JsonConvert.DeserializeObject<List<IhaleAraclariDTO>>(await responseMessage.Content.ReadAsStringAsync());
-            }
-
-            return listem;
-        }
-
+        
         public async Task<IhaleBilgisiDTO?> IdyeGoreIhaleGetir(int id)
         {
 	        ProviderBase<IhaleBilgisiDTO> ihale = new ProviderBase<IhaleBilgisiDTO>(_httpClient);
@@ -46,13 +36,24 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 	       return await ihale.ProviderBaseGetAsync($"Ihale/{id}");
 
         }
+        public async Task<List<AracBilgiDTO>?> IhaledekiAraclariGetir(int id)
+        {
+	        List<AracBilgiDTO>? listem = null;
+	        var responseMessage = await _httpClient.GetAsync($"Arac/IhaleAraclar/{id}");
+	        if (responseMessage.IsSuccessStatusCode)
+	        {
+		        listem = JsonConvert.DeserializeObject<List<AracBilgiDTO>>(await responseMessage.Content.ReadAsStringAsync());
+	        }
 
+	        return listem;
+        }
         public async Task<IhaledekiAracFiyatBilgisiDTO?> AracIdyeGoreIhaleFiyatlariniGetir(int aracId)
         {
-            ProviderBase<IhaledekiAracFiyatBilgisiDTO> ihale = new ProviderBase<IhaledekiAracFiyatBilgisiDTO>(_httpClient);
+	        ProviderBase<IhaledekiAracFiyatBilgisiDTO> ihale = new ProviderBase<IhaledekiAracFiyatBilgisiDTO>(_httpClient);
 
-            return await ihale.ProviderBaseGetAsync($"Ihale/AracIhaleFiyat/{aracId}");
+	        return await ihale.ProviderBaseGetAsync($"Arac/AracIhaleFiyat/{aracId}");
 
         }
+
 	}
 }

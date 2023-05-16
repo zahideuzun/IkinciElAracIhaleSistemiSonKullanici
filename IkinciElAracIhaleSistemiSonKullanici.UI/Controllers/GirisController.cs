@@ -50,12 +50,19 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
                 return await _provider.RoleGoreSayfalariDuzenle(girisYapanUye.Data.RolId);
             }, TimeSpan.FromMinutes(30));
 
-
-            var cachedekiVeri =  _cacheHelper.GetCachedList<UyeYetkiSayfaDTO>("RolSayfaCacheKey");
-
-
             return RedirectToAction("Index", "Default");
 
+        }
+
+        [NonAction]
+        public async Task<List<UyeYetkiSayfaDTO>> CacheAt(int rolId)
+        {
+            var sayfalar = await _cacheHelper.CreateAndCacheList("RolSayfaCacheKey", async () =>
+            {
+                return await _provider.RoleGoreSayfalariDuzenle(rolId);
+            }, TimeSpan.FromMinutes(30));
+
+            return sayfalar;
         }
 
     }

@@ -1,4 +1,4 @@
-﻿@model List<IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs.IhaleAraclariDTO>
+﻿@model List<IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracBilgiDTO>
 @{
     ViewData["Title"] = "IhaleDetay";
     Layout = "~/Views/Shared/_UiLayout.cshtml";
@@ -15,7 +15,7 @@
 				<li><a href="#"> @ViewBag.IhaleBilgisi.Statu </a></li> </h5>
 				
 				<hr/>
-				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @ViewBag.IhaleBilgisi.IhaleBaslangicTarihi.Date -> @ViewBag.IhaleBilgisi.BaslangicSaati </li>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @ViewBag.IhaleBilgisi.IhaleBaslangicTarihi. -> @ViewBag.IhaleBilgisi.BaslangicSaati </li>
 				<hr/>
 				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Bitiş Tarihi: @ViewBag.IhaleBilgisi.IhaleBitisTarihi -> @ViewBag.IhaleBilgisi.BitisSaati </li>
 			</ul>
@@ -38,15 +38,15 @@
 				                </h6>
 			                </div>
 			                <div class="column text-lg-center">
-				                <p class="price-title">@item.Marka</p>
-				                <p class="price-title">@item.Model</p>
+				                <p class="price-title">@item.Marka.MarkaAdi</p>
+				                <p class="price-title">@item.Model.ModelAdi</p>
 				                <p class="price-title">@item.Km KM</p>
 			                </div>
 			                <div class="column price-number text-md-right">
 				                <h3 class="pricing">
 					                <sup class="pri1">$</sup>25<sup class="pri">99</sup>
 				                </h3>
-								<button class="btn btn-style btn-primary ml-lg-3" data-toggle="modal" data-target="#teklifModal" id="@item.AracId">Teklif Ver</button>
+								<button class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</button>
 
 			                </div>
 		                </div>

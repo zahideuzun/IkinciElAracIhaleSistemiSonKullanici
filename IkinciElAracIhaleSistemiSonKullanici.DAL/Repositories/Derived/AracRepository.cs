@@ -37,6 +37,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 						Id = a.Id,
 						Plaka = a.Plaka,
 						MarkaId = a.MarkaId,
+						Marka = a.Marka,
+						Model = a.Model,
 						ModelId = a.ModelId,
 						Km = a.Km,
 						Yil = a.Yil 

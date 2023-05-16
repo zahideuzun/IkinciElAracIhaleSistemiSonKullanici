@@ -28,8 +28,4 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\AracDTOs\AracOzellikDTOs\" />
-  </ItemGroup>
-
 </Project>

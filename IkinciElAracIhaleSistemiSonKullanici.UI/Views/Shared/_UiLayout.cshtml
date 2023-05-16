@@ -2,15 +2,15 @@
 <!doctype html>
 <html lang="zxx">
 
-@await Html.PartialAsync("/Views/LayoutPartial/_HeaderPartial.cshtml")
+@await Html.PartialAsync("/Views/Shared/Partials/_HeaderPartial.cshtml")
 <body>
 @await Html.PartialAsync("/Views/Shared/Partials/_NavbarPartial.cshtml")
 
 @RenderBody()
 
-@await Html.PartialAsync("~/Views/LayoutPartial/_FooterPartial.cshtml")
+	@await Html.PartialAsync("~/Views/Shared/Partials/_FooterPartial.cshtml")
 
-@await Html.PartialAsync("/Views/LayoutPartial/_ScriptsPartial.cshtml")
+	@await Html.PartialAsync("/Views/Shared/Partials/_ScriptsPartial.cshtml")
 
 </body>
 </html>

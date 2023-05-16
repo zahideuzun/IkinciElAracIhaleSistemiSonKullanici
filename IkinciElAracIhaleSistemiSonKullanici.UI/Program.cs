@@ -53,7 +53,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 			{
 				x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
 			});
-
+			builder.Services.AddHttpClient<AracProvider>(x =>
+			{
+				x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+			});
 
 			#endregion
 

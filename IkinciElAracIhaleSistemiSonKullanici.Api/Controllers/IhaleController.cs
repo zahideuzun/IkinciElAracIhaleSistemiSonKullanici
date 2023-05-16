@@ -10,15 +10,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
     public class IhaleController : ControllerBase
     {
         private readonly IIhaleManager _ihaleManager;
-        private readonly IAracIhaleManager _aracIhaleManager;
-        private readonly IAracManager _aracManager;
-        private readonly IAracTeklifManager _aracTeklifManager;
-        public IhaleController(IIhaleManager ihaleManager, IAracIhaleManager aracIhaleManager, IAracManager aracManager, IAracTeklifManager aracTeklifManager)
+        public IhaleController(IIhaleManager ihaleManager)
         {
             _ihaleManager = ihaleManager;
-            _aracIhaleManager = aracIhaleManager;
-            _aracManager = aracManager;
-            _aracTeklifManager = aracTeklifManager;
         }
 
         [HttpGet("Index")]
@@ -28,12 +22,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 			return BaseActionType.ReturnResponse(ihaleListesi);
 		}
 
-        [HttpGet("IhaleAraclar/{Id}")]
-        public async Task<IActionResult> IhaledekiAraclar(int id)
-        {
-            var ihaledekiAracListesi = await _aracManager.IhaledekiAraclariGetir(id);
-			return BaseActionType.ReturnResponse(ihaledekiAracListesi);
-		}
 
         [HttpGet("{Id}")]
         public async Task<IActionResult> IdyeGoreGelenIhale(int id)
@@ -42,11 +30,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 			return BaseActionType.ReturnResponse(ihale);
 		}
 
-        [HttpGet("AracIhaleFiyat/{aracId}")]
-        public async Task<IActionResult> IhaledekiAracFiyatBilgileri(int aracId)
-        {
-            var ihale = await _aracIhaleManager.IhaledekiAracFiyatBilgisiniGetir(aracId);
-			return BaseActionType.ReturnResponse(ihale);
-		}
+        
     }
 }

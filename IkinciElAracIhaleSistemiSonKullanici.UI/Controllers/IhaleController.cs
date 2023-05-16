@@ -27,5 +27,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 	        var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
 	        return View(ihaledekiAraclar);
         }
+
+        
     }
 }

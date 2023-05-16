@@ -1,9 +1,7 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension
 @using Microsoft.AspNetCore.Http
-@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper
-@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.RolYetkiDTOs
 @inject IHttpContextAccessor HttpContextAccessor
 @inject CacheHelper _cacheHelper
 @{
@@ -35,16 +33,7 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto">
-                    @*<li class="nav-item">
-                        <a class="nav-link" href="/Default/Index">Ana Sayfa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Ihale/Index">İhaleler</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Iletisim/Index">İletişim</a>
-                    </li>*@
-                    @{
+	                @{
                         var task = sayfalar;
                         if (task != null)
                         {

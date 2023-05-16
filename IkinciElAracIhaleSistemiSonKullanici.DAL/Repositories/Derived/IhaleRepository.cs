@@ -47,7 +47,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 							 IhaleAdi = k.IhaleAdi,
 							 IhaleTuruId = k.IhaleTuru.IhaleTuruId, /*== (int)IhaleTurleri.Bireysel ? "Bireysel" : "Kurumsal",*/
 							 IhaleTuru = k.IhaleTuru,
-							 IhaleBaslangicTarihi = k.IhaleBaslangicTarihi,
+							 IhaleBaslangicTarihi = k.IhaleBaslangicTarihi.Date,
 							 IhaleBitisTarihi = k.IhaleBitisTarihi,
 							 BaslangicSaat = k.BaslangicSaat,
 							 BitisSaat = k.BitisSaat,

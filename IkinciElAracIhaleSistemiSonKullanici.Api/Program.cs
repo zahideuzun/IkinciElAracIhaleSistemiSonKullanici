@@ -50,6 +50,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
 			builder.Services.AddScoped<IAracTeklifRepository, AracTeklifRepository>();
 			builder.Services.AddScoped<ISayfaManager, SayfaManager>();
 			builder.Services.AddScoped<ISayfaRepository, SayfaRepository>();
+			builder.Services.AddScoped<IOzellikDetayRepository, OzellikDetayRepository>();
+			builder.Services.AddScoped<IOzellikDetayManager, OzellikDetayManager>();
+			
 
             #endregion
 

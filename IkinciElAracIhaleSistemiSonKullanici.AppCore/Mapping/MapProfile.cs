@@ -7,6 +7,9 @@ using AutoMapper;
 using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.MarkaDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.ModelDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 
@@ -39,6 +42,14 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping
 			CreateMap<Sayfa, UyeYetkiSayfaDTO>();
 			CreateMap<UyeYetkiSayfaDTO, Sayfa>();
 
+			CreateMap<OzellikDetay, OzellikDetayDTO>();
+			CreateMap<OzellikDetayDTO, OzellikDetay>();
+
+			CreateMap<Marka, MarkaDTO>();
+			CreateMap<MarkaDTO, Marka>();
+
+			CreateMap<Model, ModelDTO>();
+			CreateMap<ModelDTO, Model>();
 
 		}
 	}
