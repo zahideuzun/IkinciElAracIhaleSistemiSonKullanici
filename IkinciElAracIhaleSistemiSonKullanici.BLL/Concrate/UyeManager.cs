@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
+using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Enums;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
-using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
-using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 {
@@ -21,16 +19,15 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 			_mapper = mapper;
 		}
 
-		public async Task<UyeGirisDTO> UyeKontrol(UyeGirisDTO uye)
+		public async Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye)
 		{
-			var girisYapanUye = await _repository.UyeKontrol(uye);
-			return _mapper.Map<UyeGirisDTO>(girisYapanUye);
-		}
+			return await _repository.UyeKontrol(uye);
+        }
 
-		public async Task<int> UyeRolunuGetir(int uyeTuruId)
+		public int UyeRolunuGetir(int uyeRol)
 		{
-			var rolId = await _repository.UyeRolunuGetir(uyeTuruId);
+            var rolId =  _repository.UyeRolunuGetir(uyeRol);
 			return rolId;
-		}
+        }
 	}
 }

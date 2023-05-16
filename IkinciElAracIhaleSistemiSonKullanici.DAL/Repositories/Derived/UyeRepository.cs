@@ -20,29 +20,47 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			_context = context;
         }
 
-		public async Task<Uye> UyeKontrol(UyeGirisDTO uye)
+		public async Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye)
 		{
 			var girisYapanUye = (from uy in _context.Uye
 				join ut in _context.UyeTuru on uy.UyeTuruId equals ut.UyeTuruId
 				where (uy.Email == uye.Email && uy.Sifre == uye.Sifre)
-				select new Uye()
+				select new UyeSessionDTO()
 				{
-					Id=uy.Id,
-					Isim = uy.Isim,
+                    Isim = uy.Isim,
 					Soyisim = uy.Soyisim,
 					UyeTuruId = uy.UyeTuruId,
-					Email = uy.Email,
-					Sifre = uy.Sifre
-				}).SingleOrDefault();
+                    RolId = uy.UyeTuruId == (int)UyeTurleri.Bireysel ? (int)UyeRolleri.Bireysel : (int)UyeRolleri.Kurumsal
+                }).SingleOrDefault();
+            
+
 			return girisYapanUye;
 		}
 
-		public async Task<int> UyeRolunuGetir(int uyeTuruId)
+		public int UyeRolunuGetir(int uyeTuruId)
 		{
-			var rolId = uyeTuruId == (int)UyeTurleri.Bireysel
-				? (int)UyeRolleri.Bireysel
-				: (int)UyeRolleri.Kurumsal;
-			return rolId;
-		}
+            if (uyeTuruId == (int)UyeTurleri.Bireysel)
+            {
+                var bireyselUye = (from bu in _context.BireyselUye
+								  select new UyeRolDTO()
+                                  {
+									  UyeId = bu.UyeId,
+									  RolId = bu.RolId
+                                  }).SingleOrDefault();
+                return bireyselUye.RolId;
+            }
+            if (uyeTuruId == (int)UyeTurleri.Kurumsal)
+            {
+                var kurumsalUye = (from bu in _context.KurumsalUye
+                    select new UyeRolDTO()
+                    {
+                        UyeId = bu.UyeId,
+                        RolId = bu.RolId
+                    }).SingleOrDefault();
+                return kurumsalUye.RolId;
+            }
+
+            return 0;
+        }
 	}
 }

@@ -1,4 +1,5 @@
 using AutoMapper;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate;
@@ -50,11 +51,18 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
 			builder.Services.AddScoped<ISayfaManager, SayfaManager>();
 			builder.Services.AddScoped<ISayfaRepository, SayfaRepository>();
 
-			#endregion
+            #endregion
 
-			#region Swagger
+            #region MemoryCacheConfiguration
 
-			builder.Services.AddSwaggerGen(a =>
+            builder.Services.AddMemoryCache();
+            builder.Services.AddScoped<CacheHelper>();
+
+            #endregion
+
+            #region Swagger
+
+            builder.Services.AddSwaggerGen(a =>
 			{
 				a.SwaggerDoc("v1", new OpenApiInfo() { Title = "AracIhale", Version = "v1" });
 			});

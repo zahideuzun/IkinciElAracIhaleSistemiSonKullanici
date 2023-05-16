@@ -1,11 +1,13 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
+﻿using IkinciElAracIhaleSistemi.Entities.Entities;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
 {
 	public interface IUyeManager
     {
-        public Task<UyeGirisDTO> UyeKontrol(UyeGirisDTO uye);
-		public Task<int> UyeRolunuGetir(int uyeTuruId);
+        public Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye);
+		public int UyeRolunuGetir(int uyeRol);
 
 	}
 }

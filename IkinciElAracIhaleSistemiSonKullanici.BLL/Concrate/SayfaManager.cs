@@ -18,7 +18,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 
 		public async Task<List<UyeYetkiSayfaDTO>> RoleGoreSayfaYetkileriniGetir(int uyeRol)
 		{
-			var sayfaListesi = await _repository.RoleGoreSayfaYetkileriniGetir(uyeRol);
+            var sayfaListesi = await _repository.RoleGoreSayfaYetkileriniGetir(uyeRol);
 			return _mapper.Map<List<UyeYetkiSayfaDTO>>(sayfaListesi);
 		}
 	}

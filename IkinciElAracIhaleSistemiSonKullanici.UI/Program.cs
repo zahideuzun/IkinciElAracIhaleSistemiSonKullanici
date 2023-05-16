@@ -1,5 +1,6 @@
 using System.Configuration;
 using AutoMapper;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate;
@@ -34,6 +35,13 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 
 
 			#endregion
+
+            #region MemoryCacheConfiguration
+
+            builder.Services.AddMemoryCache();
+            builder.Services.AddScoped<CacheHelper>();
+
+            #endregion
 
 
 			#region ProviderConfiguration

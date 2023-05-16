@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.Bases;
+﻿
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using Microsoft.AspNetCore.Mvc;
 

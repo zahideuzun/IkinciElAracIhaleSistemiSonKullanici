@@ -10,10 +10,10 @@
 	
 	var sessiondakiUyeBilgisi = HttpContextAccessor.HttpContext.Session.MySessionGet<UyeGirisDTO>("girisYapanUye");
     //todo BU KULLANIM YANLİS DOGRUSUNU OGREN!!!!
-	UyeRepository uye = new UyeRepository();
-	int rolId= await uye.UyeRolunuGetir(sessiondakiUyeBilgisi.UyeTuruId);
-	SayfaRepository sayfa = new SayfaRepository();
-	var menuListesi = await sayfa.RoleGoreSayfaYetkileriniGetir(rolId);
+	//UyeRepository uye = new UyeRepository();
+	//int rolId= await uye.UyeRolunuGetir(sessiondakiUyeBilgisi.UyeTuruId);
+	//SayfaRepository sayfa = new SayfaRepository();
+	//var menuListesi = await sayfa.RoleGoreSayfaYetkileriniGetir(rolId);
 }
 
 <header id="site-header" class="fixed-top">
@@ -47,7 +47,7 @@
 		            <li class="nav-item">
 			            <a class="nav-link" href="/Iletisim/Index">İletişim</a>
 		            </li>
-		            @{
+		           @* @{
 			            var task = menuListesi;
 			            if (task != null)
 			            {
@@ -58,7 +58,7 @@
 					            </li>
 				            }
 			            }
-		            }
+		            }*@
 	            </ul>
             </div>
             <div class="d-lg-block d-none">

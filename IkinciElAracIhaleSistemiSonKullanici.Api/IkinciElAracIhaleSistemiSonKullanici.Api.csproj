@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="IkinciElAracIhaleSistemi.Entities">
+      <HintPath>..\..\IkinciElAracIhaleSistemi\IkinciElAracIhaleSistemi.Entities\bin\Debug\IkinciElAracIhaleSistemi.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="IkinciElAracIhaleSistemiSonKullanici.Data">
       <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.Data.dll</HintPath>
     </Reference>

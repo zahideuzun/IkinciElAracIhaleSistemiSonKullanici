@@ -1,17 +1,16 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension
 @using Microsoft.AspNetCore.Http
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO
-@using IkinciElAracIhaleSistemiSonKullanici.DAL.Context
-@using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
+@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs
+@using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper
+@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.RolYetkiDTOs
 @inject IHttpContextAccessor HttpContextAccessor
+@inject CacheHelper _cacheHelper
 @{
 
-    var sessiondakiUyeBilgisi = HttpContextAccessor.HttpContext.Session.MySessionGet<UyeGirisDTO>("girisYapanUye");
-    //todo DOGRUSUNU OGREN!!!!
- //   UyeRepository uye = new UyeRepository();
- //   int rolId = await uye.UyeRolunuGetir(sessiondakiUyeBilgisi.UyeTuruId);
-	//SayfaRepository sayfa = new SayfaRepository();
- //   var menuListesi = await sayfa.RoleGoreSayfaYetkileriniGetir(rolId);
+    var sessiondakiUyeBilgisi = HttpContextAccessor.HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
+    var sayfalar = _cacheHelper.GetCachedList<UyeYetkiSayfaDTO>("RolSayfaCacheKey");
+	
 }
 
 <header id="site-header" class="fixed-top">
@@ -36,7 +35,7 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                    @*<li class="nav-item">
                         <a class="nav-link" href="/Default/Index">Ana Sayfa</a>
                     </li>
                     <li class="nav-item">
@@ -44,9 +43,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Iletisim/Index">İletişim</a>
-                    </li>
-                   @* @{
-                        var task = menuListesi;
+                    </li>*@
+                    @{
+                        var task = sayfalar;
                         if (task != null)
                         {
                             foreach (var item in task)
@@ -56,11 +55,12 @@
                                 </li>
                             }
                         }
-                    }*@
+                    }
                 </ul>
             </div>
             <div class="d-lg-block d-none">
-                <a href="#" class="btn btn-style btn-secondary">@(sessiondakiUyeBilgisi.Isim+" "+sessiondakiUyeBilgisi.Soyisim)</a>
+                <a href="#" class="btn btn-style btn-secondary">@(sessiondakiUyeBilgisi.Isim + " " + sessiondakiUyeBilgisi.Soyisim)</a>
+                <span></span>
             </div>
             <!-- toggle switch for light and dark theme -->
             <div class="mobile-position">

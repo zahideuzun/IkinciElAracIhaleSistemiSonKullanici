@@ -6,10 +6,15 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Bases
+namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType
 {
 	public static class BaseActionType
 	{
+		/// <summary>
+		/// action resultlarin kontrolünü yapan base metot
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns></returns>
 		public static IActionResult ReturnResponse(object data)
 		{
 			if (data == null)

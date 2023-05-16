@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.Bases;
+﻿using IkinciElAracIhaleSistemi.Entities.Entities;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 {
@@ -13,16 +11,23 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
     public class GirisController : ControllerBase
     {
         private readonly IUyeManager _uyeManager;
-        public GirisController(IUyeManager uyeManager)
+        private readonly ISayfaManager _sayfaManager;
+        public GirisController(IUyeManager uyeManager, ISayfaManager sayfaManager)
         {
             _uyeManager = uyeManager;
-           
+            _sayfaManager = sayfaManager;
         }
         [HttpPost("Index")]
         public async Task<IActionResult> UyeGiris([FromBody] UyeGirisDTO uye)
         {
 	        var girisYapanUye = await _uyeManager.UyeKontrol(uye);
 			return BaseActionType.ReturnResponse(girisYapanUye);
+        }
+        [HttpGet("Sayfa/{Id}")]
+        public async Task<IActionResult> RoleGoreSayfalariGetir(int Id)
+        {
+            var girisYapanUye = await _sayfaManager.RoleGoreSayfaYetkileriniGetir(Id);
+            return BaseActionType.ReturnResponse(girisYapanUye);
         }
     }
 }

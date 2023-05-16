@@ -1,10 +1,5 @@
-﻿using System.Configuration.Provider;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.Bases;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using Newtonsoft.Json;
-using System.Text;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 {

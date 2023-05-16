@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Bases
+namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType
 {
     public class GeneralDataType<T> : GeneralType
     {

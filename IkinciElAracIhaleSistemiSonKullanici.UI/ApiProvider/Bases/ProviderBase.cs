@@ -12,6 +12,11 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 		{
 			_httpClient = httpClient;
 		}
+		/// <summary>
+		/// provider metotlarin get async serialize islemini yapan base metot
+		/// </summary>
+		/// <param name="uriPath"></param>
+		/// <returns></returns>
 		public async Task<T> ProviderBaseGetAsync(string uriPath)
 		{
 			T test = null;
@@ -22,6 +27,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 			}
 			return test;
 		}
+
 		public async Task<List<T>> ProviderBaseListGetAsync(string uriPath)
 		{
 			List<T> test = null;
