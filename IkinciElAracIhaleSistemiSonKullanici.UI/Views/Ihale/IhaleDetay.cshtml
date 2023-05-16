@@ -15,9 +15,9 @@
 				<li><a href="#"> @ViewBag.IhaleBilgisi.Statu </a></li> </h5>
 				
 				<hr/>
-				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @ViewBag.IhaleBilgisi.BaslangicTarihi.Date -> @ViewBag.IhaleBilgisi.BaslangicSaati </li>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @ViewBag.IhaleBilgisi.IhaleBaslangicTarihi.Date -> @ViewBag.IhaleBilgisi.BaslangicSaati </li>
 				<hr/>
-				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Bitiş Tarihi: @ViewBag.IhaleBilgisi.BitisTarihi -> @ViewBag.IhaleBilgisi.BitisSaati </li>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Bitiş Tarihi: @ViewBag.IhaleBilgisi.IhaleBitisTarihi -> @ViewBag.IhaleBilgisi.BitisSaati </li>
 			</ul>
 		</div>
 	</div>
@@ -62,7 +62,7 @@
 					            </button>
 				            </div>
 				            <div class="modal-body">
-					            <input type="hidden" name="ihaleId" value="@ViewBag.IhaledekiAracinFiyatBilgisi.IhaleId" />
+					            @*<input type="hidden" name="ihaleId" value="@ViewBag.IhaledekiAracinFiyatBilgisi.IhaleId" />*@
 					            <p>Arac ID'si: <span id="aracId"></span></p>
 					            <form>
 

@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemi.Entities.Entities;
+﻿using System.Diagnostics;
+using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 using IkinciElAracIhaleSistemiSonKullanici.EF;
@@ -10,7 +11,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 		private readonly AracIhaleContext _context;
 		public SayfaRepository()
 		{
-
+			_context = new AracIhaleContext();
 		}
 		public SayfaRepository(AracIhaleContext context) : base(context)
 		{
@@ -19,7 +20,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 
 		public async Task<List<Sayfa>> RoleGoreSayfaYetkileriniGetir(int uyeRol)
 		{
-			return (from s in _context.RolYetki
+			var liste =(from s in _context.RolYetki
 				join sy in _context.Sayfa on s.SayfaId equals sy.SayfaId
 				where s.RolId == uyeRol
 				select new Sayfa()
@@ -28,6 +29,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 					SayfaAdi = sy.SayfaAdi,
 					SayfaLink = sy.SayfaLink
 				}).ToList();
-		}
+            return liste;
+        }
 	}
 }
