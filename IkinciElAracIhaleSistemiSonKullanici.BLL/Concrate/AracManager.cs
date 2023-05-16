@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
@@ -20,10 +21,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 			_repository = repository;
 			_mapper = mapper;
 		}
-		public async Task<List<IhaledekiAracFiyatBilgisiDTO>> IhaledekiAraclariGetir(int id)
+		public async Task<List<AracBilgiDTO>> IhaledekiAraclariGetir(int id)
 		{
 			var ihaledekiAraclar = await _repository.IhaledekiAraclariGetir(id);
-			return _mapper.Map<List<IhaledekiAracFiyatBilgisiDTO>>(ihaledekiAraclar);
+			return _mapper.Map<List<AracBilgiDTO>>(ihaledekiAraclar);
 		}
 	}
 }

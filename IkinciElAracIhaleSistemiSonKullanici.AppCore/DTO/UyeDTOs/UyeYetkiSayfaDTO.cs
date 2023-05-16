@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs
 {
-    public class UyeYetkiDTO
+    public class UyeYetkiSayfaDTO
     {
         public int SayfaId { get; set; }
-        public string SayfaIsim { get; set; }
+        public string SayfaAdi { get; set; }
         public string SayfaLink { get; set; }
     }
 }

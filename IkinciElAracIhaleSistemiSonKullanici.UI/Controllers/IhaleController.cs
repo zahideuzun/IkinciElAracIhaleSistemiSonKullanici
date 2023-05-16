@@ -15,6 +15,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
         public async Task<IActionResult> Index()
         {
             var ihaleListesi = await _ihaleProvider.IhaleListesiniGetir();
+
             return View(ihaleListesi);
         }
 

@@ -1,18 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
+using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
+using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 {
-	public class AracTeklifManager : IAracManager
+	public class AracTeklifManager : IAracTeklifManager
 	{
-		public Task<List<IhaledekiAracFiyatBilgisiDTO>> IhaledekiAraclariGetir(int id)
+		private readonly IAracTeklifRepository _repository;
+		private readonly IMapper _mapper;
+
+		public AracTeklifManager(IAracTeklifRepository repository, IMapper mapper)
 		{
-			throw new NotImplementedException();
+			_repository = repository;
+			_mapper = mapper;
+		}
+		public async Task<IhaleTeklifVermeDTO> IhaledekiAracaYeniTeklifVerme(IhaleTeklifVermeDTO teklifDto)
+		{
+			DataManager data = new DataManager();
+			await data.GetAracTeklifRepository().IhaledekiAracaTeklifVerme(teklifDto);
+			return _mapper.Map<IhaleTeklifVermeDTO>(teklifDto);
 		}
 	}
 }

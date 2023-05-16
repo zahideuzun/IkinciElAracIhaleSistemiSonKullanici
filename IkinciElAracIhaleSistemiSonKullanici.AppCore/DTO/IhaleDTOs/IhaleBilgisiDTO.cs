@@ -8,6 +8,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
     public class IhaleBilgisiDTO
     {
+        //todo ihaleleri listeledigin yerde bilgileri ver
         public int IhaleId { get; set; }
         public string IhaleAdi { get; set; }
         public DateTime BaslangicTarihi { get; set; }
@@ -16,8 +17,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
         public TimeSpan BitisSaati { get; set; }
         public string Statu { get; set; }
         public string IhaleTuru { get; set; }
-        public string OlusturanKullanici { get; set; }
-        public DateTime OlusturulmaTarihi { get; set; }
-        
+
     }
 }

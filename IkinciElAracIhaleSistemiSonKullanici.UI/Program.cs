@@ -19,25 +19,54 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
+
+			#region MappingConfiguration
+
 			builder.Services.AddAutoMapper(typeof(Program));
 			var mapperConfig = new MapperConfiguration(mc =>
 			{
 				mc.AddProfile(new MapProfile());
 			});
 			IMapper mapper = mapperConfig.CreateMapper();
-			builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
-            builder.Services.AddHttpClient<GirisProvider>(x =>
-            {
-                x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
-            });
-            builder.Services.AddHttpClient<IhaleProvider>(x =>
-            {
-                x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
-            });
+			builder.Services.AddSingleton(mapper);
 
-            builder.Services.AddScoped<IIhaleManager, IhaleManager>();
-            builder.Services.AddScoped<IUyeManager, UyeManager>();
-            builder.Services.AddScoped<IIhaleRepository, IhaleRepository>();
+
+			#endregion
+
+
+			#region ProviderConfiguration
+			builder.Services.AddHttpClient<GirisProvider>(x =>
+			{
+				x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+			});
+			builder.Services.AddHttpClient<IhaleProvider>(x =>
+			{
+				x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+			});
+
+
+			#endregion
+
+
+			#region InstanceConfiguration
+			builder.Services.AddScoped<IIhaleManager, IhaleManager>();
+			builder.Services.AddScoped<IUyeManager, UyeManager>();
+			builder.Services.AddScoped<IUyeRepository, UyeRepository>();
+			builder.Services.AddScoped<IIhaleRepository, IhaleRepository>();
+			builder.Services.AddScoped<IAracIhaleManager, AracIhaleManager>();
+			builder.Services.AddScoped<IAracIhaleRepository, AracIhaleRepository>();
+			builder.Services.AddScoped<IAracManager, AracManager>();
+			builder.Services.AddScoped<IAracRepository, AracRepository>();
+			builder.Services.AddScoped<IAracTeklifManager, AracTeklifManager>();
+			builder.Services.AddScoped<IAracTeklifRepository, AracTeklifRepository>();
+			builder.Services.AddScoped<ISayfaManager, SayfaManager>();
+			builder.Services.AddScoped<ISayfaRepository, SayfaRepository>();
+
+
+			#endregion
+
 
 			builder.Services.AddSession(options =>
             {

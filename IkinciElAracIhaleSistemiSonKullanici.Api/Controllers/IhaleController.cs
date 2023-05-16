@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.Bases;
+using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
@@ -8,54 +9,43 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
     public class IhaleController : ControllerBase
     {
         private readonly IIhaleManager _ihaleManager;
-        public IhaleController(IIhaleManager ihaleManager)
+        private readonly IAracIhaleManager _aracIhaleManager;
+        private readonly IAracManager _aracManager;
+        private readonly IAracTeklifManager _aracTeklifManager;
+        public IhaleController(IIhaleManager ihaleManager, IAracIhaleManager aracIhaleManager, IAracManager aracManager, IAracTeklifManager aracTeklifManager)
         {
             _ihaleManager = ihaleManager;
+            _aracIhaleManager = aracIhaleManager;
+            _aracManager = aracManager;
+            _aracTeklifManager = aracTeklifManager;
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> IhaleGet()
         {
             var ihaleListesi = await _ihaleManager.TumIhaleleriGetir();
-            if (ihaleListesi ==null)
-            {
-                return BadRequest();
-            }
-            return Ok(ihaleListesi);
-        }
+			return BaseActionType.ReturnResponse(ihaleListesi);
+		}
 
         [HttpGet("IhaleAraclar/{Id}")]
         public async Task<IActionResult> IhaledekiAraclar(int id)
         {
-            //var ihaleListesi = await _ihaleManager.IhaledekiAraclariGetir(id);
-            //if (ihaleListesi == null)
-            //{
-            //    return BadRequest();
-            //}
-            //return Ok(ihaleListesi);
-            return Ok();
-        }
+            var ihaledekiAracListesi = await _aracManager.IhaledekiAraclariGetir(id);
+			return BaseActionType.ReturnResponse(ihaledekiAracListesi);
+		}
 
         [HttpGet("{Id}")]
         public async Task<IActionResult> IdyeGoreGelenIhale(int id)
         {
             var ihale = await _ihaleManager.IdyeGoreIhaleGetir(id);
-            if (ihale == null)
-            {
-                return BadRequest();
-            }
-            return Ok(ihale);
-        }
+			return BaseActionType.ReturnResponse(ihale);
+		}
+
         [HttpGet("AracIhaleFiyat/{aracId}")]
         public async Task<IActionResult> IhaledekiAracFiyatBilgileri(int aracId)
         {
-            //var ihale = await _ihaleManager.IhaledekiAracBilgisiniGetir(aracId);
-            //if (ihale == null)
-            //{
-            //    return BadRequest();
-            //}
-            //return Ok(ihale);
-            return Ok();
-        }
+            var ihale = await _aracIhaleManager.IhaledekiAracFiyatBilgisiniGetir(aracId);
+			return BaseActionType.ReturnResponse(ihale);
+		}
     }
 }

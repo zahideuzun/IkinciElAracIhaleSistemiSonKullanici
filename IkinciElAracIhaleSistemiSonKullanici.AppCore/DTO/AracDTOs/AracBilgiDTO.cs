@@ -12,5 +12,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs
 		public int MarkaId { get; set; }
 		public int ModelId { get; set; }
 		public decimal Km { get; set; }
+		public int Yil { get; set; }
 	}
 }

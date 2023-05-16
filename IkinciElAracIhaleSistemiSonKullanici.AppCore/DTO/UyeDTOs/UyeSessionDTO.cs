@@ -10,7 +10,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs
     {
         public string Isim { get; set; }
         public string Soyisim { get; set; }
-        public string UyeTuru { get; set; }
+        public int UyeTuruId { get; set; }
         public int RolId { get; set; }
     }
 }

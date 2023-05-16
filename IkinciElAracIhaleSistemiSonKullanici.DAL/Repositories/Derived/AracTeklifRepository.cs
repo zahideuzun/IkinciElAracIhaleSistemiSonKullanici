@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 {
-	public class AracTeklifRepository : EfRepositoryBase<AracIhaleContext,AracTeklif>, IAracTeklifRepository
+	public class AracTeklifRepository : EfRepositoryBase<AracIhaleContext, AracTeklif>, IAracTeklifRepository
 	{
 		private readonly AracIhaleContext _context;
 		public AracTeklifRepository()
@@ -25,25 +25,22 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			_context = context;
 		}
 
-		public Task<AracTeklif> IhaledekiAracaTeklifVerme(IhaleTeklifBilgileriDTO teklifDto)
+		public async Task<AracTeklif> IhaledekiAracaTeklifVerme(IhaleTeklifVermeDTO teklifDto)
 		{
-			var aracIdyeGoreAracIhaleTablosu =
-				_context.AracIhale.SingleOrDefaultAsync(a => a.AracId == teklifDto.AracId && a.IsActive);
 
-
-			//DataManager data = new DataManager();
-			////data.GetAracTeklifRepository().AddAsync();
-
-			_context.AracTeklif.Add(new AracTeklif()
+			var yeniAracTeklif = new AracTeklif()
 			{
-				AracIhaleId = aracIdyeGoreAracIhaleTablosu.Id,
+				AracIhaleId = teklifDto.AracIhaleId,
 				TeklifEdilenFiyat = teklifDto.TeklifEdilenFiyat,
 				OnaylandiMi = false,
 				UyeId = teklifDto.UyeId,
 				TeklifTarihi = DateTime.Now
-			});
+			};
 
-			return null;
+			_context.AracTeklif.Add(yeniAracTeklif);
+			await _context.SaveChangesAsync();
+
+			return yeniAracTeklif;
 		}
 	}
 }

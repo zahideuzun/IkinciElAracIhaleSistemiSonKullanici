@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
 {
 	public interface IAracManager
 	{
-		public Task<List<IhaledekiAracFiyatBilgisiDTO>> IhaledekiAraclariGetir(int id);
+		public Task<List<AracBilgiDTO>> IhaledekiAraclariGetir(int id);
 	}
 }

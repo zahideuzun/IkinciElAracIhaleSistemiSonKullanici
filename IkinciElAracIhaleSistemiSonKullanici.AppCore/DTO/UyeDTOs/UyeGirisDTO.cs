@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO
 {
-    public class UyeGirisDTO
+	public class UyeGirisDTO
     {
-        [Required(ErrorMessage = "Lütfen kullanıcı adını giriniz")]
-        public string Mail { get; set; }
+	    public string Isim { get; set; }
+	    public string Soyisim { get; set; }
+	    public int UyeTuruId { get; set; }
+
+		[Required(ErrorMessage = "Lütfen mail adresinizi giriniz")]
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Lütfen şifrenizi giriniz")]
         public string Sifre { get; set; }
+
 
     }
 }

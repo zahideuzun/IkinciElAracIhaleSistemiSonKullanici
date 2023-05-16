@@ -31,8 +31,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 
 			return IdyeGoreIhale;
 
-
-			
 		}
 
 		public async Task<List<Ihale>> TumIhaleleriGetir()
@@ -55,8 +53,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 							 IhaleStatu = k.IhaleStatu,
 						 }).ToList();
 		}
-
-		
-	}
+    }
 
 }

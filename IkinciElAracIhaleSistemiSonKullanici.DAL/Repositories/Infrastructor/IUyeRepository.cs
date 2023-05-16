@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IkinciElAracIhaleSistemi.Entities.Entities;
+﻿using IkinciElAracIhaleSistemi.Entities.Entities;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.Data;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor
 {
-    public interface IUyeRepository : ISelectableRepo<Uye>, ISelectableRepoAsync<Uye>
+	public interface IUyeRepository : ISelectableRepo<Uye>, ISelectableRepoAsync<Uye>
     {
-        
+	    public Task<Uye> UyeKontrol(UyeGirisDTO uye);
+	    public Task<int> UyeRolunuGetir(int uyeTuruId);
 
     }
 

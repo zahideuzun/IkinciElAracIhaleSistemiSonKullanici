@@ -15,13 +15,13 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
         {
             _httpClient = httpClient;
         }
-        public async Task<GeneralDataType<UyeSessionDTO>> KullaniciGirisKontrolTask(UyeGirisDTO uye)
+        public async Task<GeneralDataType<UyeGirisDTO>> KullaniciGirisKontrolTask(UyeGirisDTO uye)
         {
             var result = await _httpClient.PostAsync("Giris/Index", new StringContent(JsonConvert.SerializeObject(uye), Encoding.UTF8, "application/json"));
 
-            var data = JsonConvert.DeserializeObject<UyeSessionDTO>(await result.Content.ReadAsStringAsync());
+            var data = JsonConvert.DeserializeObject<UyeGirisDTO>(await result.Content.ReadAsStringAsync());
 
-            return new GeneralDataType<UyeSessionDTO>(result.RequestMessage?.ToString(), result.StatusCode, data);
+            return new GeneralDataType<UyeGirisDTO>(result.RequestMessage?.ToString(), result.StatusCode, data);
         }
 
     }

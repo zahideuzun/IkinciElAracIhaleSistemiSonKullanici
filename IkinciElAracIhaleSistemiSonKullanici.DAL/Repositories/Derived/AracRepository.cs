@@ -20,6 +20,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 		{
 			_context = context;
 		}
+
 		public async Task<List<Arac>> IhaledekiAraclariGetir(int id)
 		{
 			int ihaleyeAitUyeId = (_context.Ihale.FirstOrDefault(a => a.Id == id).UyeId);
@@ -37,7 +38,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 						Plaka = a.Plaka,
 						MarkaId = a.MarkaId,
 						ModelId = a.ModelId,
-						Km = a.Km
+						Km = a.Km,
+						Yil = a.Yil 
 					}).ToList();
 				return araclar;
 			}

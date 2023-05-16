@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
+﻿using AutoMapper;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Enums;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results;
@@ -7,46 +8,29 @@ using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
 
-
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 {
     public class UyeManager : IUyeManager
     {
-        private readonly AracIhaleContext _context;
-        
-        public UyeManager(AracIhaleContext context)
-        {
-            _context = context;
-        }
-        public async Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye)
-        {
-            
-            var girisYapanUye = (from uy in _context.Uye 
-                join ut in _context.UyeTuru on  uy.UyeTuruId equals ut.UyeTuruId
-                where (uy.Email == uye.Mail && uy.Sifre == uye.Sifre)
-                    select new UyeSessionDTO()
-                    {
-                        Isim = uy.Isim,
-                        Soyisim = uy.Soyisim,
-                        UyeTuru = uy.UyeTuru.UyeTuruAdi,
-                        RolId = uy.UyeTuruId == (int)UyeTurleri.Bireysel ? (int)UyeRolleri.Bireysel : (int)UyeRolleri.Kurumsal,
-                    }).SingleOrDefault();
-            
+		private readonly IUyeRepository _repository;
+		private readonly IMapper _mapper;
 
-            return girisYapanUye;
-        }
+		public UyeManager(IUyeRepository repository, IMapper mapper)
+		{
+			_repository = repository;
+			_mapper = mapper;
+		}
 
-        public async Task<List<UyeYetkiDTO>> RoleGoreSayfaYetkileriniGetir(int uyeRol)
-        {
-            return (from s in _context.RolYetki
-                        join sy in _context.Sayfa on s.SayfaId equals sy.SayfaId
-                        where s.RolId == uyeRol
-                        select new UyeYetkiDTO()
-                        {
-                            SayfaId = sy.SayfaId,
-                            SayfaIsim = sy.SayfaAdi,
-                            SayfaLink = sy.SayfaLink
-                        }).ToList();
-        }
-    }
+		public async Task<UyeGirisDTO> UyeKontrol(UyeGirisDTO uye)
+		{
+			var girisYapanUye = await _repository.UyeKontrol(uye);
+			return _mapper.Map<UyeGirisDTO>(girisYapanUye);
+		}
+
+		public async Task<int> UyeRolunuGetir(int uyeTuruId)
+		{
+			var rolId = await _repository.UyeRolunuGetir(uyeTuruId);
+			return rolId;
+		}
+	}
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Bases;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using Microsoft.AspNetCore.Http;
@@ -12,23 +13,16 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
     public class GirisController : ControllerBase
     {
         private readonly IUyeManager _uyeManager;
-        private readonly IMapper _mapper;
-        public GirisController(IUyeManager uyeManager, IMapper mapper)
+        public GirisController(IUyeManager uyeManager)
         {
             _uyeManager = uyeManager;
-            _mapper = mapper;
+           
         }
         [HttpPost("Index")]
         public async Task<IActionResult> UyeGiris([FromBody] UyeGirisDTO uye)
         {
-            if (!ModelState.IsValid && uye ==null)
-            {
-                return BadRequest();
-            }
-
-            var girisYapanUye = await _uyeManager.UyeKontrol(uye);
-            return Ok(girisYapanUye);
-
+	        var girisYapanUye = await _uyeManager.UyeKontrol(uye);
+			return BaseActionType.ReturnResponse(girisYapanUye);
         }
     }
 }

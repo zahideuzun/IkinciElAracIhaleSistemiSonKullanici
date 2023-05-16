@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
 {
-    public interface IUyeManager
+	public interface IUyeManager
     {
-        public Task<UyeSessionDTO> UyeKontrol(UyeGirisDTO uye);
-        public Task<List<UyeYetkiDTO>> RoleGoreSayfaYetkileriniGetir(int uyeRol);
-    }
+        public Task<UyeGirisDTO> UyeKontrol(UyeGirisDTO uye);
+		public Task<int> UyeRolunuGetir(int uyeTuruId);
+
+	}
 }

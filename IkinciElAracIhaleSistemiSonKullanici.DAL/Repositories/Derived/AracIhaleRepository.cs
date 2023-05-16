@@ -20,14 +20,15 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 		{
 			_context = context;
 		}
-		public async Task<AracIhale?> IhaledekiAracFiyatBilgisiniGetir(int aracId)
+		public async Task<AracIhale?> IhaledekiAracFiyatBilgisiniGetir(int ihaleId)
 		{
 			return (from ai in _context.AracIhale
 				join ih in _context.Ihale on ai.IhaleId equals ih.Id
 				join a in _context.Arac on ai.AracId equals a.Id
-				where ai.AracId == aracId && ai.IsActive
+				where ai.IhaleId == ihaleId && ai.IsActive
 				select new AracIhale()
 				{
+					Id = ai.Id,
 					AracId = ai.AracId,
 					IhaleId = ai.IhaleId,
 					IhaleBaslangicFiyati = ai.IhaleBaslangicFiyati,

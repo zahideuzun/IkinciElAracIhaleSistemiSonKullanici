@@ -27,10 +27,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
         }
         public PartialViewResult _NavbarPartial()
         {
-            var sessiondakiUyeBilgisi = HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
-            ViewBag.uye = sessiondakiUyeBilgisi;
-            ViewBag.Menu = _uyeManager.RoleGoreSayfaYetkileriniGetir(sessiondakiUyeBilgisi.RolId);
-            return PartialView();
+	        return PartialView();
         }
         public PartialViewResult _ScriptsPartial()
         {
