@@ -11,6 +11,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
 {
 	public interface IAracIhaleManager
 	{
-		public Task<IhaledekiAracFiyatBilgisiDTO> IhaledekiAracFiyatBilgisiniGetir(int aracId);
+		public Task<List<AracIhaleDTO>> IhaleIdyeGoreIhaledekiAracFiyatBilgileriniGetir(int ihaleId);
+		public Task<AracIhaleDTO> AracIdyeGoreIhaledekiAracFiyatBilgisiniGetir(int aracId);
 	}
 }

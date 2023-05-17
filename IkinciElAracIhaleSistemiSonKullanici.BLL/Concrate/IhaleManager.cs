@@ -23,12 +23,23 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 	        return _mapper.Map<IhaleBilgisiDTO>(idyeGoreIhale);
         }
 
+		public async Task<List<IhaleBilgisiDTO>> KurumsalFirmayaAitIhaleleriGetir(int id)
+		{
+			var idyeGoreIhale = await _repository.KurumsalFirmayaAitIhaleleriGetir(id);
+			return _mapper.Map<List<IhaleBilgisiDTO>>(idyeGoreIhale);
+		}
 
-        public async Task<List<IhaleBilgisiDTO>> TumIhaleleriGetir()
+		public async Task<List<IhaleBilgisiDTO>> TumIhaleleriGetir()
         {
 	        var ihaleler = await _repository.TumIhaleleriGetir();
 	        return _mapper.Map<List<IhaleBilgisiDTO>>(ihaleler);
         }
-
-    }
+		//todo bireysel ilanlari listele 
+		
+		public async Task<List<IhaleBilgisiDTO>> TumKurumsalIhaleleriGetir()
+		{
+			var ihaleler = await _repository.TumKurumsalIhaleleriGetir();
+			return _mapper.Map<List<IhaleBilgisiDTO>>(ihaleler);
+		}
+	}
 }

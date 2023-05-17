@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
-	public class IhaledekiAracFiyatBilgisiDTO
+	public class AracIhaleDTO
 	{
 		//todo teklif ekraninda yazdirilacak
 		public int AracIhaleId { get; set; }

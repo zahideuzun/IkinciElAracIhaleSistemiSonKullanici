@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 {
@@ -20,9 +21,29 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 		{
 			_context = context;
 		}
-		public async Task<AracIhale?> IhaledekiAracFiyatBilgisiniGetir(int ihaleId)
+
+		public Task<AracIhale?> AracIdyeGoreIhaledekiAracFiyatBilgisiniGetir(int aracId)
 		{
-			return (from ai in _context.AracIhale
+			var ihale = (from ai in _context.AracIhale
+				join ih in _context.Ihale on ai.IhaleId equals ih.Id
+				join a in _context.Arac on ai.AracId equals a.Id
+				where ai.AracId == aracId && ai.IsActive
+				//orderby ai.MinimumAlimFiyati descending
+				select new AracIhale()
+				{
+					Id = ai.Id,
+					AracId = ai.AracId,
+					IhaleId = ai.IhaleId,
+					IhaleBaslangicFiyati = ai.IhaleBaslangicFiyati,
+					MinimumAlimFiyati = ai.MinimumAlimFiyati
+				}).SingleOrDefaultAsync();
+
+			return ihale;
+		}
+
+		public Task<List<AracIhale?>> IhaleIdyeGoreIhaledekiAracFiyatBilgileriniGetir(int ihaleId)
+		{
+			var ihale= (from ai in _context.AracIhale
 					join ih in _context.Ihale on ai.IhaleId equals ih.Id
 					join a in _context.Arac on ai.AracId equals a.Id
 					where ai.IhaleId == ihaleId && ai.IsActive
@@ -34,8 +55,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 						IhaleId = ai.IhaleId,
 						IhaleBaslangicFiyati = ai.IhaleBaslangicFiyati,
 						MinimumAlimFiyati = ai.MinimumAlimFiyati
-					}).SingleOrDefault();
-
+					}).ToListAsync();
+			
+			return ihale;
 		}
 	}
 }

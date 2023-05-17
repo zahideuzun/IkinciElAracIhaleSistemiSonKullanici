@@ -23,5 +23,13 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 
 			return listem;
 		}
+
+		public async Task<AracIhaleDTO?> AracIdyeGoreAracIhaleFiyatiniGetir(int aracId)
+		{
+			ProviderBase<AracIhaleDTO> ihale = new ProviderBase<AracIhaleDTO>(_httpClient);
+
+			return await ihale.ProviderBaseGetAsync($"Arac/AracIhaleFiyat/{aracId}");
+		}
+
 	}
 }

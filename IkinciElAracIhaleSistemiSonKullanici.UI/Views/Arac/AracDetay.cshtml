@@ -1,58 +1,14 @@
-﻿@model List<IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs.OzellikDetayDTO>
+﻿@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs
+@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@*@model Tuple<List<OzellikDetayDTO>,AracIhaleDTO>*@
+@model AracDetayViewModel
 @{
 	ViewData["Title"] = "AracDetay";
 	Layout = "~/Views/Shared/_UiLayout.cshtml";
+	//ViewBag.AracId = Model.Item2.AracId;
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
-
-<section class="w3l-about-breadcrumb text-left">
-	<div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<h2 class="title">Araç Bilgileri</h2>
-					<ul class="breadcrumbs-custom-path mt-2">
-						<h5>
-						<li><a href="#">dsafsa </a></li></h5>
-						<hr />
-						@foreach (var item in Model)
-						{
-							<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @item.OzellikDetayi </li>
-							<hr />
-						}
-					</ul>
-				</div>
-				<div class="col-lg-6 mt-lg-0 mt-5 contact-right">
-					<form id="teklifFormu" action="/Arac/TeklifVer" method="post" class="signin-form mt-5">
-						<div class="row">
-							<div class="col-lg-12 breadcrumbs-custom-path">
-								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Minimum Alım Fiyatı: 100000 TL</li>
-								<hr/>
-								<hr/>
-								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Lütfen minimum alım fiyatının altında teklif vermeyiniz!</li>
-								<hr/>
-								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> İhale süreci tamamlandığında ihale sonucunun bilgisi sisteme kayıtlı olduğunuz mail adresiniz üzerinden tarafınıza iletilecektir. </li>
-								<hr/><hr/>
-							</div>
-							<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
-								<h5>
-								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li> </h5>
-								<hr/>
-								<input type="text" name="w3lName" id="fiyatBilgisi" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;" />
-							</div>
-						</div>
-						<hr/>
-						<div class="text-center">
-							<button type="submit" class="btn btn-style btn-primary" onclick="submitForm()">Teklif Ver</button>
-
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 
 <section class="w3l-contact" id="contact">
 	<div class="contact-infubd py-5">
@@ -147,6 +103,68 @@
 
 	</div>
 </section>
+<section class="w3l-about-breadcrumb text-left">
+	<div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<h2 class="title">Araç Bilgileri</h2>
+					<ul class="breadcrumbs-custom-path mt-2">
+						<h5>
+							<li><a href="#">dsafsa </a></li></h5>
+						<hr />
+						@foreach (var item in Model.IhaledekiAraclar)
+						{
+							<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @item.OzellikDetayi </li>
+							<hr />
+						}
+					</ul>
+				</div>
+				@*<form method="post" asp-action="AddComment" asp-controller="Comment">
+					<input type="hidden" name="DestinationID" value="@ViewBag.destID" />
+					<input type="hidden" name="AppUserID" value="@ViewBag.userID" />
+					<div class="form-group">
+						<textarea name="CommentContent" class="form-control" placeholder="Yorumunuz*" required=""
+                      spellcheck="false"></textarea>
+					</div>   
+					<div class="submit text-right">
+						<button class="btn btn-style btn-primary" type="submit" id="btnsave">Yorum Yap</button>
+					</div>
+				</form>*@
+				<div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+					
+					<form id="teklifFormu" method="post" asp-action="TeklifVer" asp-controller="Arac" class="signin-form mt-5">
+						<div class="row">
+							<div class="col-lg-12 breadcrumbs-custom-path">
+								<input type="hidden" name="AracIhaleId" value="@Model.AracinFiyatBilgisi.AracIhaleId"/>
+								<input type="hidden" name="AracId" value="@Model.AracId" />
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Minimum Alım Fiyatı: @Model.AracinFiyatBilgisi.MinimumAlimFiyati TL</li>
+								<hr/>
+								<hr/>
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Lütfen minimum alım fiyatının altında teklif vermeyiniz!</li>
+								<hr/>
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> İhale süreci tamamlandığında ihale sonucunun bilgisi sisteme kayıtlı olduğunuz mail adresiniz üzerinden tarafınıza iletilecektir. </li>
+								<hr/><hr/>
+							</div>
+							<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
+								<h5>
+									<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li> </h5>
+								<hr/>
+								<input type="text" name="TeklifEdilenFiyat" value="TeklifEdilenFiyat" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;"/>
+							</div>
+						</div>
+						<hr/>
+						<div class="text-center">
+							<button type="submit" class="btn btn-style btn-primary">Teklif Ver</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
 
 <script>
 	// Formu submit etme fonksiyonu

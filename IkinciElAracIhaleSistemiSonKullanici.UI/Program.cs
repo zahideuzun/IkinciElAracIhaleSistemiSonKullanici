@@ -48,14 +48,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 			builder.Services.AddHttpClient<GirisProvider>(x =>
 			{
 				x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+				x.Timeout = TimeSpan.FromSeconds(120);
 			});
 			builder.Services.AddHttpClient<IhaleProvider>(x =>
 			{
 				x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+				x.Timeout = TimeSpan.FromSeconds(120);
 			});
 			builder.Services.AddHttpClient<AracProvider>(x =>
 			{
 				x.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]);
+				x.Timeout = TimeSpan.FromSeconds(120);
 			});
 
 			#endregion

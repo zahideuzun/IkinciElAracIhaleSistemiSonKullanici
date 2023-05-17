@@ -36,10 +36,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 	       return await ihale.ProviderBaseGetAsync($"Ihale/{id}");
 
         }
-        public async Task<List<AracBilgiDTO>?> IhaledekiAraclariGetir(int id)
+        public async Task<List<AracBilgiDTO>?> IhaledekiAraclariGetir(int ihaleId)
         {
 	        List<AracBilgiDTO>? listem = null;
-	        var responseMessage = await _httpClient.GetAsync($"Arac/IhaleAraclar/{id}");
+	        var responseMessage = await _httpClient.GetAsync($"Arac/IhaleAraclar/{ihaleId}");
 	        if (responseMessage.IsSuccessStatusCode)
 	        {
 		        listem = JsonConvert.DeserializeObject<List<AracBilgiDTO>>(await responseMessage.Content.ReadAsStringAsync());
@@ -47,11 +47,39 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 
 	        return listem;
         }
-        public async Task<IhaledekiAracFiyatBilgisiDTO?> AracIdyeGoreIhaleFiyatlariniGetir(int aracId)
+        public async Task<List<AracIhaleDTO?>> IhaleIdyeGoreAracFiyatlariniGetir(int ihaleId)
         {
-	        ProviderBase<IhaledekiAracFiyatBilgisiDTO> ihale = new ProviderBase<IhaledekiAracFiyatBilgisiDTO>(_httpClient);
+	        List<AracIhaleDTO>? listem = null;
+	        var responseMessage = await _httpClient.GetAsync($"Ihale/AracIhaleFiyat/{ihaleId}");
+	        if (responseMessage.IsSuccessStatusCode)
+	        {
+		        listem = JsonConvert.DeserializeObject<List<AracIhaleDTO>>(await responseMessage.Content.ReadAsStringAsync());
+	        }
+	        return listem;
+			
+        }
 
-	        return await ihale.ProviderBaseGetAsync($"Arac/AracIhaleFiyat/{aracId}");
+        public async Task<List<IhaleBilgisiDTO?>> IdyeGoreKurumsalIhaleleriGetir(int firmaId)
+        {
+	        List<IhaleBilgisiDTO>? listem = null;
+	        var responseMessage = await _httpClient.GetAsync($"Ihale/KurumsalIhale/{firmaId}");
+	        if (responseMessage.IsSuccessStatusCode)
+	        {
+		        listem = JsonConvert.DeserializeObject<List<IhaleBilgisiDTO>>(await responseMessage.Content.ReadAsStringAsync());
+	        }
+	        return listem;
+
+        }
+
+        public async Task<List<IhaleBilgisiDTO?>> KurumsalIhaleleriGetir()
+        {
+	        List<IhaleBilgisiDTO>? listem = null;
+	        var responseMessage = await _httpClient.GetAsync($"Ihale/KurumsalIhale");
+	        if (responseMessage.IsSuccessStatusCode)
+	        {
+		        listem = JsonConvert.DeserializeObject<List<IhaleBilgisiDTO>>(await responseMessage.Content.ReadAsStringAsync());
+	        }
+	        return listem;
 
         }
 

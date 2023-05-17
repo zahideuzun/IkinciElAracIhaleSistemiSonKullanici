@@ -29,17 +29,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 		}
 
 
-		[HttpGet("IhaleAraclar/{Id}")]
-		public async Task<IActionResult> IhaledekiAraclar(int id)
+		[HttpGet("IhaleAraclar/{ihaleId}")]
+		public async Task<IActionResult> IhaledekiAraclar(int ihaleId)
 		{
-			var ihaledekiAracListesi = await _aracManager.IhaledekiAraclariGetir(id);
+			var ihaledekiAracListesi = await _aracManager.IhaledekiAraclariGetir(ihaleId);
 			return BaseActionType.ReturnResponse(ihaledekiAracListesi);
 		}
 
 		[HttpGet("AracIhaleFiyat/{aracId}")]
 		public async Task<IActionResult> IhaledekiAracFiyatBilgileri(int aracId)
 		{
-			var ihale = await _aracIhaleManager.IhaledekiAracFiyatBilgisiniGetir(aracId);
+			var ihale = await _aracIhaleManager.AracIdyeGoreIhaledekiAracFiyatBilgisiniGetir(aracId);
 			return BaseActionType.ReturnResponse(ihale);
 		}
 	}

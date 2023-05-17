@@ -1,7 +1,7 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 
-@model Tuple<List<AracBilgiDTO>,IhaledekiAracFiyatBilgisiDTO>
+@model Tuple<List<AracBilgiDTO>,List<AracIhaleDTO>>
 
 @{
     ViewData["Title"] = "IhaleDetay";
@@ -32,6 +32,10 @@
 	            <!--/box-->
                 @foreach (var item in Model.Item1)
                 {
+	               @* if (Model.Item2.Contains())
+	                {
+		                
+	                }*@
 	                <div class="price-box">
 		                <div class="grid grid-column-2">
 			                <div class="column pr-img-gd">
@@ -44,9 +48,20 @@
 				                <p class="price-title">@item.Model.ModelAdi</p>
 				                <p class="price-title">@item.Km KM</p>
 			                </div>
+							@foreach (var item2 in Model.Item2)
+							{
+								if (item.Id == item2.AracId)
+								{
+									<p class="price-title">İhale Başlangıç Fiyatı: &nbsp;</p>
+									<p class="price-title">@item2.IhaleBaslangicFiyati</p>
+									<br/>
+									<p class="price-title">Minimum Alım Fiyatı: &nbsp;</p>
+									<p class="price-title">@item2.MinimumAlimFiyati</p>
+								}
+								
+							}
 			                <div class="column price-number text-md-right">
-				                <p class="price-title">Minimum Alım Fiyatı</p>
-				                <p class="price-title">@Model.Item2.MinimumAlimFiyati</p>
+				                
 				                <a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
 			                </div>
 		                </div>

@@ -27,6 +27,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 				where (uy.Email == uye.Email && uy.Sifre == uye.Sifre)
 				select new UyeSessionDTO()
 				{
+                    UyeId = uy.Id,
                     Isim = uy.Isim,
 					Soyisim = uy.Soyisim,
 					UyeTuruId = uy.UyeTuruId,

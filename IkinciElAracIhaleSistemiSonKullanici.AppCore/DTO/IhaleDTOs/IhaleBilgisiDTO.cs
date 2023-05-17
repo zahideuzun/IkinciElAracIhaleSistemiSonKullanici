@@ -16,7 +16,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
         public TimeSpan BaslangicSaati { get; set; }
         public TimeSpan BitisSaati { get; set; }
         public string Statu { get; set; }
-        public string IhaleTuru { get; set; }
+        public IhaleTuruDTO IhaleTuru { get; set; }
 
     }
 }

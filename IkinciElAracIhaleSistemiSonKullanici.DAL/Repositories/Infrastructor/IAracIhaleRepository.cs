@@ -10,6 +10,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor
 {
 	public interface IAracIhaleRepository : ISelectableRepo<AracIhale>, ISelectableRepoAsync<AracIhale>
 	{
-		public Task<AracIhale?> IhaledekiAracFiyatBilgisiniGetir(int aracId);
+		public Task<List<AracIhale?>> IhaleIdyeGoreIhaledekiAracFiyatBilgileriniGetir(int ihaleId);
+		public Task<AracIhale?> AracIdyeGoreIhaledekiAracFiyatBilgisiniGetir(int aracId);
 	}
 }

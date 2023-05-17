@@ -27,8 +27,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping
 			CreateMap<Ihale, IhaleBilgisiDTO>()
 				.ForMember(a => a.IhaleId, opt => opt.MapFrom(x => x.Id));
 
-			CreateMap<AracIhale, IhaledekiAracFiyatBilgisiDTO>();
-			CreateMap<IhaledekiAracFiyatBilgisiDTO, AracIhale>();
+			CreateMap<AracIhale, AracIhaleDTO>()
+				.ForMember(a=>a.AracIhaleId, opt=>opt.MapFrom(x=>x.Id));
+			CreateMap<AracIhaleDTO, AracIhale>()
+				.ForMember(a=>a.Id, opt=>opt.MapFrom(x=>x.AracIhaleId));
 
 			CreateMap<AracBilgiDTO, Arac>();
 			CreateMap<Arac, AracBilgiDTO>();
@@ -50,6 +52,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping
 
 			CreateMap<Model, ModelDTO>();
 			CreateMap<ModelDTO, Model>();
+
+			CreateMap<IhaleTuru, IhaleTuruDTO>();
+			CreateMap<IhaleTuruDTO, IhaleTuru>();
 
 		}
 	}

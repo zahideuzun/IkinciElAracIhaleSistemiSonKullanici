@@ -21,10 +21,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 			_repository = repository;
 			_mapper = mapper;
 		}
-		public async Task<IhaledekiAracFiyatBilgisiDTO> IhaledekiAracFiyatBilgisiniGetir(int aracId)
+
+		public async Task<AracIhaleDTO> AracIdyeGoreIhaledekiAracFiyatBilgisiniGetir(int aracId)
 		{
-			var ihaledekiAracFiyatBilgisi = await _repository.IhaledekiAracFiyatBilgisiniGetir(aracId);
-			return _mapper.Map<IhaledekiAracFiyatBilgisiDTO>(ihaledekiAracFiyatBilgisi);
+			var ihaledekiAracFiyatBilgisi = await _repository.AracIdyeGoreIhaledekiAracFiyatBilgisiniGetir(aracId);
+			return _mapper.Map<AracIhaleDTO>(ihaledekiAracFiyatBilgisi);
+		}
+
+		public async Task<List<AracIhaleDTO>> IhaleIdyeGoreIhaledekiAracFiyatBilgileriniGetir(int ihaleId)
+		{
+			var ihaledekiAracFiyatBilgisi = await _repository.IhaleIdyeGoreIhaledekiAracFiyatBilgileriniGetir(ihaleId);
+			return _mapper.Map<List<AracIhaleDTO>>(ihaledekiAracFiyatBilgisi);
 		}
 	}
 }
