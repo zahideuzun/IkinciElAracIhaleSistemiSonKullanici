@@ -23,9 +23,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
         public async Task<IActionResult> IhaleDetay(int id)
         {
 	        ViewBag.IhaleBilgisi = await _ihaleProvider.IdyeGoreIhaleGetir(id);
-	        ViewBag.IhaledekiAracinFiyatBilgisi = await _ihaleProvider.AracIdyeGoreIhaleFiyatlariniGetir(id);
+	        var hede =  await _ihaleProvider.AracIdyeGoreIhaleFiyatlariniGetir(id);
 	        var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
-	        return View(ihaledekiAraclar);
+	        return View(Tuple.Create(ihaledekiAraclar, hede));
         }
 
         

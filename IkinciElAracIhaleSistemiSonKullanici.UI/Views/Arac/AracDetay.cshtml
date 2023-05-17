@@ -1,8 +1,164 @@
-﻿
+﻿@model List<IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs.OzellikDetayDTO>
 @{
-    ViewData["Title"] = "AracDetay";
-    Layout = "~/Views/Shared/_UiLayout.cshtml";
+	ViewData["Title"] = "AracDetay";
+	Layout = "~/Views/Shared/_UiLayout.cshtml";
 }
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h1>AracDetay</h1>
 
+<section class="w3l-about-breadcrumb text-left">
+	<div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<h2 class="title">Araç Bilgileri</h2>
+					<ul class="breadcrumbs-custom-path mt-2">
+						<h5>
+						<li><a href="#">dsafsa </a></li></h5>
+						<hr />
+						@foreach (var item in Model)
+						{
+							<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @item.OzellikDetayi </li>
+							<hr />
+						}
+					</ul>
+				</div>
+				<div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+					<form id="teklifFormu" action="/Arac/TeklifVer" method="post" class="signin-form mt-5">
+						<div class="row">
+							<div class="col-lg-12 breadcrumbs-custom-path">
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Minimum Alım Fiyatı: 100000 TL</li>
+								<hr/>
+								<hr/>
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Lütfen minimum alım fiyatının altında teklif vermeyiniz!</li>
+								<hr/>
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> İhale süreci tamamlandığında ihale sonucunun bilgisi sisteme kayıtlı olduğunuz mail adresiniz üzerinden tarafınıza iletilecektir. </li>
+								<hr/><hr/>
+							</div>
+							<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
+								<h5>
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li> </h5>
+								<hr/>
+								<input type="text" name="w3lName" id="fiyatBilgisi" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;" />
+							</div>
+						</div>
+						<hr/>
+						<div class="text-center">
+							<button type="submit" class="btn btn-style btn-primary" onclick="submitForm()">Teklif Ver</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="w3l-contact" id="contact">
+	<div class="contact-infubd py-5">
+		<div class="container py-lg-3">
+			<div class="contact-grids row">
+				<div class="col-lg-12">
+					<div class="best-rooms py-5">
+						<div class="container py-md-5">
+							<div class="ban-content-inf row">
+								<div class="maghny-gd-1 col-lg-6">
+									<div class="maghny-grid">
+										<figure class="effect-lily border-radius  m-0">
+											<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g10.jpg" alt="" />
+											<figcaption>
+												<div>
+													<h4>3Days, 4 Nights</h4>
+													<p>From 1720$ </p>
+												</div>
+
+											</figcaption>
+										</figure>
+									</div>
+								</div>
+								<div class="maghny-gd-1 col-lg-6 mt-lg-0 mt-4">
+									<div class="row">
+										<div class="maghny-gd-1 col-6">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g9.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>3Days, 4 Nights</h4>
+															<p>From 1220$ </p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+										<div class="maghny-gd-1 col-6">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g8.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>3Days, 4 Nights</h4>
+															<p>From 1620$ </p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+										<div class="maghny-gd-1 col-6 mt-4">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g7.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>3Days, 4 Nights</h4>
+															<p>From 1820$ </p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+										<div class="maghny-gd-1 col-6 mt-4">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g6.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>3Days, 4 Nights</h4>
+															<p>From 1520$ </p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</section>
+
+<script>
+	// Formu submit etme fonksiyonu
+	function submitForm() {
+		// Teklif edilen fiyatı al
+		var teklifFiyat = document.getElementById('fiyatBilgisi').value;
+
+		// Formun action özelliğini güncelle
+		var form = document.getElementById('teklifFormu');
+		form.action = '/Arac/TeklifVer?fiyat=' + encodeURIComponent(teklifFiyat);
+
+		// Formu submit et
+		form.submit();
+	}
+</script>

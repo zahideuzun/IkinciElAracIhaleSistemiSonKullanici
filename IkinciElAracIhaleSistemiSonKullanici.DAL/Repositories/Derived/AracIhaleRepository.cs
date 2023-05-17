@@ -23,18 +23,19 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 		public async Task<AracIhale?> IhaledekiAracFiyatBilgisiniGetir(int ihaleId)
 		{
 			return (from ai in _context.AracIhale
-				join ih in _context.Ihale on ai.IhaleId equals ih.Id
-				join a in _context.Arac on ai.AracId equals a.Id
-				where ai.IhaleId == ihaleId && ai.IsActive
-				select new AracIhale()
-				{
-					Id = ai.Id,
-					AracId = ai.AracId,
-					IhaleId = ai.IhaleId,
-					IhaleBaslangicFiyati = ai.IhaleBaslangicFiyati,
-					MinimumAlimFiyati = ai.MinimumAlimFiyati
-				}).SingleOrDefault();
-			 
+					join ih in _context.Ihale on ai.IhaleId equals ih.Id
+					join a in _context.Arac on ai.AracId equals a.Id
+					where ai.IhaleId == ihaleId && ai.IsActive
+					//orderby ai.MinimumAlimFiyati descending
+					select new AracIhale()
+					{
+						Id = ai.Id,
+						AracId = ai.AracId,
+						IhaleId = ai.IhaleId,
+						IhaleBaslangicFiyati = ai.IhaleBaslangicFiyati,
+						MinimumAlimFiyati = ai.MinimumAlimFiyati
+					}).SingleOrDefault();
+
 		}
 	}
 }
