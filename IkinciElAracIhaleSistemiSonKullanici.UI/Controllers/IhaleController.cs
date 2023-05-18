@@ -35,10 +35,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 		[HttpGet]
 		public async Task<IActionResult> IhaleDetay(int id)
 		{
-			ViewBag.IhaleBilgisi = await _ihaleProvider.IdyeGoreIhaleGetir(id);
+			var idIhale = await _ihaleProvider.IdyeGoreIhaleGetir(id);
 			var ihaledekiAracFiyatBilgileri = await _ihaleProvider.IhaleIdyeGoreAracFiyatlariniGetir(id);
 			var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
-			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri));
+			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri, idIhale));
 		}
 
 

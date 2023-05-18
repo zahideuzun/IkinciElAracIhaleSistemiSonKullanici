@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
-using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
-using System.Transactions;
-using IkinciElAracIhaleSistemi.Entities.Entities;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 {
@@ -22,15 +18,15 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 		}
 		public Result IhaledekiAracaYeniTeklifVerme(IhaleTeklifVermeDTO teklifDto)
 		{
-			//var deneme = _mapper.Map<AracTeklif>(teklifDto);
-			//DataManager data = new DataManager();
-			//var test = data.GetAracTeklifRepository().Add(deneme);
-			
 			var deneme = _repository.IhaledekiAracaTeklifVerme(teklifDto);
 			return deneme;
 
+
+			//var deneme = _mapper.Map<AracTeklif>(teklifDto);
+			//DataManager data = new DataManager();
+			//var test = data.GetAracTeklifRepository().Add(deneme);
 			//data.MySaveChanges();
-			//return test != null
+			//retu test != null
 			//	? new SuccessResult("Teklifiniz kaydedildi!")
 			//	: new ErrorResult("Teklif kaydedilemedi!");
 		}

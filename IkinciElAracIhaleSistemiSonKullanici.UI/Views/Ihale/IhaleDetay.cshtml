@@ -1,7 +1,8 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
+@using IkinciElAracIhaleSistemi.Entities.VM.Enum
 
-@model Tuple<List<AracBilgiDTO>,List<AracIhaleDTO>>
+@model Tuple<List<AracBilgiDTO>,List<AracIhaleDTO>, IhaleBilgisiDTO>
 
 @{
     ViewData["Title"] = "IhaleDetay";
@@ -11,15 +12,15 @@
 <section class="w3l-about-breadcrumb text-left">
 	<div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
 		<div class="container">
-			<h2 class="title">@ViewBag.IhaleBilgisi.IhaleAdi</h2>
+			<h2 class="title">@Model.Item3.IhaleAdi</h2>
 			<ul class="breadcrumbs-custom-path mt-2">
 				<h5>
-				<li><a href="#"> @ViewBag.IhaleBilgisi.Statu </a></li> </h5>
+				<li><a href="#"> @Model.Item3.Statu </a></li> </h5>
 				
 				<hr/>
-				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @ViewBag.IhaleBilgisi.IhaleBaslangicTarihi. -> @ViewBag.IhaleBilgisi.BaslangicSaati </li>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @Model.Item3.IhaleBaslangicTarihi.ToShortDateString() -> 18:20 </li>
 				<hr/>
-				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Bitiş Tarihi: @ViewBag.IhaleBilgisi.IhaleBitisTarihi -> @ViewBag.IhaleBilgisi.BitisSaati </li>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Bitiş Tarihi: @Model.Item3.IhaleBitisTarihi.ToShortDateString() -> 20:00 </li>
 			</ul>
 		</div>
 	</div>
@@ -39,23 +40,45 @@
 					                <span class="fa fa-delicious mr-2" aria-hidden="true"></span> @item.Plaka
 				                </h6>
 			                </div>
-			                <div class="column text-lg-center">
+							<div class="column pr-img-gd text-lg-center">
 				                <p class="price-title">@item.Marka.MarkaAdi</p>
 				                <p class="price-title">@item.Model.ModelAdi</p>
 				                <p class="price-title">@item.Km KM</p>
 			                </div>
 			                @foreach (var item2 in Model.Item2.Where(item2 => item.Id == item2.AracId))
 			                {
-				                <p class="price-title">İhale Başlangıç Fiyatı: &nbsp;</p>
-				                <p class="price-title">@item2.IhaleBaslangicFiyati</p>
+								<p class="price-title">İhale Başlangıç Fiyatı: &nbsp;@item2.IhaleBaslangicFiyati</p>
+				                <p class="price-title"></p>
 				                <br/>
-				                <p class="price-title">Minimum Alım Fiyatı: &nbsp;</p>
-				                <p class="price-title">@item2.MinimumAlimFiyati</p>
+								<p class="price-title">Minimum Alım Fiyatı: &nbsp; @item2.MinimumAlimFiyati</p>
+				                <p class="price-title"></p>
 			                }
 			                <div class="column price-number text-md-right">
 				                
 				                <a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
 			                </div>
+							@*@if (Model.Item3.Statu == "Başladı")
+							{
+								<div class="column price-number text-md-right">
+				                
+									<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
+								</div>
+							}
+							@if (Model.Item3.Statu == "Bitti")
+							{
+								<div class="column price-number text-md-right">
+
+									<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklifleri Gör</a>
+								</div>
+							}
+			                @if (Model.Item3.Statu == IhaleStatuleri.Baslamadi.ToString())
+			                {
+				                <div class="column price-number text-md-right">
+
+					                <a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Arac Detay Gör</a>
+				                </div>
+			                }*@
+			                
 		                </div>
 	                </div>
 

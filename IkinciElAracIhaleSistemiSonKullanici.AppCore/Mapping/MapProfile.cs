@@ -11,6 +11,7 @@ using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.MarkaDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.ModelDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.StatuDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping
@@ -55,6 +56,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping
 
 			CreateMap<IhaleTuru, IhaleTuruDTO>();
 			CreateMap<IhaleTuruDTO, IhaleTuru>();
+
+			CreateMap<Statu, StatuDTO>();
+			CreateMap<StatuDTO, Statu>();
+
+			CreateMap<IhaleStatu, IhaleStatuDTO>();
+			CreateMap<IhaleStatuDTO, IhaleStatu>();
 
 		}
 	}
