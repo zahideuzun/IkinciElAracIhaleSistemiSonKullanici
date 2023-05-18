@@ -14,5 +14,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
 
         public Task<List<IhaleBilgisiDTO>> TumKurumsalIhaleleriGetir();
         public Task<List<IhaleBilgisiDTO>> KurumsalFirmayaAitIhaleleriGetir(int id);
+        public Task<List<IhaleBilgisiDTO>> BireyselIhaleleriGetir();
 	}
 }

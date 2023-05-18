@@ -12,7 +12,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Context
 {
     public class AracIhaleContext : DbContext
     {
-        public AracIhaleContext()
+        public AracIhaleContext():base()
         {
             
         }

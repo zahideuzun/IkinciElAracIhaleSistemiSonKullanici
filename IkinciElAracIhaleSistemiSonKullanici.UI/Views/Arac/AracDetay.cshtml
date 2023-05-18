@@ -1,108 +1,15 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@*@model Tuple<List<OzellikDetayDTO>,AracIhaleDTO>*@
+
 @model AracDetayViewModel
 @{
 	ViewData["Title"] = "AracDetay";
 	Layout = "~/Views/Shared/_UiLayout.cshtml";
-	//ViewBag.AracId = Model.Item2.AracId;
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<section class="w3l-contact" id="contact">
-	<div class="contact-infubd py-5">
-		<div class="container py-lg-3">
-			<div class="contact-grids row">
-				<div class="col-lg-12">
-					<div class="best-rooms py-5">
-						<div class="container py-md-5">
-							<div class="ban-content-inf row">
-								<div class="maghny-gd-1 col-lg-6">
-									<div class="maghny-grid">
-										<figure class="effect-lily border-radius  m-0">
-											<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g10.jpg" alt="" />
-											<figcaption>
-												<div>
-													<h4>3Days, 4 Nights</h4>
-													<p>From 1720$ </p>
-												</div>
 
-											</figcaption>
-										</figure>
-									</div>
-								</div>
-								<div class="maghny-gd-1 col-lg-6 mt-lg-0 mt-4">
-									<div class="row">
-										<div class="maghny-gd-1 col-6">
-											<div class="maghny-grid">
-												<figure class="effect-lily border-radius">
-													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g9.jpg" alt="" />
-													<figcaption>
-														<div>
-															<h4>3Days, 4 Nights</h4>
-															<p>From 1220$ </p>
-														</div>
-
-													</figcaption>
-												</figure>
-											</div>
-										</div>
-										<div class="maghny-gd-1 col-6">
-											<div class="maghny-grid">
-												<figure class="effect-lily border-radius">
-													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g8.jpg" alt="" />
-													<figcaption>
-														<div>
-															<h4>3Days, 4 Nights</h4>
-															<p>From 1620$ </p>
-														</div>
-
-													</figcaption>
-												</figure>
-											</div>
-										</div>
-										<div class="maghny-gd-1 col-6 mt-4">
-											<div class="maghny-grid">
-												<figure class="effect-lily border-radius">
-													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g7.jpg" alt="" />
-													<figcaption>
-														<div>
-															<h4>3Days, 4 Nights</h4>
-															<p>From 1820$ </p>
-														</div>
-
-													</figcaption>
-												</figure>
-											</div>
-										</div>
-										<div class="maghny-gd-1 col-6 mt-4">
-											<div class="maghny-grid">
-												<figure class="effect-lily border-radius">
-													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g6.jpg" alt="" />
-													<figcaption>
-														<div>
-															<h4>3Days, 4 Nights</h4>
-															<p>From 1520$ </p>
-														</div>
-
-													</figcaption>
-												</figure>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-</section>
 <section class="w3l-about-breadcrumb text-left">
 	<div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
 		<div class="container">
@@ -111,7 +18,7 @@
 					<h2 class="title">Araç Bilgileri</h2>
 					<ul class="breadcrumbs-custom-path mt-2">
 						<h5>
-							<li><a href="#">dsafsa </a></li></h5>
+							<li><a href="#"> Araca Ait Özellikler </a></li></h5>
 						<hr />
 						@foreach (var item in Model.IhaledekiAraclar)
 						{
@@ -120,17 +27,7 @@
 						}
 					</ul>
 				</div>
-				@*<form method="post" asp-action="AddComment" asp-controller="Comment">
-					<input type="hidden" name="DestinationID" value="@ViewBag.destID" />
-					<input type="hidden" name="AppUserID" value="@ViewBag.userID" />
-					<div class="form-group">
-						<textarea name="CommentContent" class="form-control" placeholder="Yorumunuz*" required=""
-                      spellcheck="false"></textarea>
-					</div>   
-					<div class="submit text-right">
-						<button class="btn btn-style btn-primary" type="submit" id="btnsave">Yorum Yap</button>
-					</div>
-				</form>*@
+				
 				<div class="col-lg-6 mt-lg-0 mt-5 contact-right">
 					
 					<form id="teklifFormu" method="post" asp-action="TeklifVer" asp-controller="Arac" class="signin-form mt-5">
@@ -163,20 +60,110 @@
 		</div>
 	</div>
 </section>
+<section class="w3l-contact" id="contact">
+	<div class="contact-infubd py-5">
+		<div class="container py-lg-3">
+			<div class="contact-grids row">
+				<div class="col-lg-12">
+					<div class="best-rooms py-5">
+						<div class="container py-md-5">
+							<div class="ban-content-inf row">
+								<div class="maghny-gd-1 col-lg-6">
+									<div class="maghny-grid">
+										<figure class="effect-lily border-radius  m-0">
+											<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g10.jpg" alt="" />
+											<figcaption>
+												<div>
+													<h4>Güvenilir Satıcı</h4>
+													<p> Adaletli İhale</p>
+												</div>
 
+											</figcaption>
+										</figure>
+									</div>
+								</div>
+								<div class="maghny-gd-1 col-lg-6 mt-lg-0 mt-4">
+									<div class="row">
+										<div class="maghny-gd-1 col-6">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g9.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>Her Modelden Araç</h4>
+															<p> Herkese Hitap Eden Araçlar </p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+										<div class="maghny-gd-1 col-6">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g8.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>Hızlı İletişim</h4>
+															<p>Müşteri Hizmetleri Desteği </p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+										<div class="maghny-gd-1 col-6 mt-4">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g7.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>Araç Bakım</h4>
+															<p>Ekspertiz Desteği</p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+										<div class="maghny-gd-1 col-6 mt-4">
+											<div class="maghny-grid">
+												<figure class="effect-lily border-radius">
+													<img class="img-fluid" src="~/Traversal-Liberty/assets/images/g6.jpg" alt="" />
+													<figcaption>
+														<div>
+															<h4>Kasko</h4>
+															<p>Kasko ve Sigorta Desteği</p>
+														</div>
+
+													</figcaption>
+												</figure>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</section>
 
 
 <script>
-	// Formu submit etme fonksiyonu
+	
 	function submitForm() {
-		// Teklif edilen fiyatı al
+		
 		var teklifFiyat = document.getElementById('fiyatBilgisi').value;
 
-		// Formun action özelliğini güncelle
 		var form = document.getElementById('teklifFormu');
-		form.action = '/Arac/TeklifVer?fiyat=' + encodeURIComponent(teklifFiyat);
+		form.action = '/Arac/TeklifVer/' + encodeURIComponent(teklifFiyat);
 
-		// Formu submit et
 		form.submit();
 	}
 </script>

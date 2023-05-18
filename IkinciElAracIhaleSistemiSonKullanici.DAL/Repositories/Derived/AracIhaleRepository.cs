@@ -16,6 +16,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 		private readonly AracIhaleContext _context;
 		public AracIhaleRepository()
 		{
+
 		}
 		public AracIhaleRepository(AracIhaleContext context) : base(context)
 		{
@@ -28,7 +29,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 				join ih in _context.Ihale on ai.IhaleId equals ih.Id
 				join a in _context.Arac on ai.AracId equals a.Id
 				where ai.AracId == aracId && ai.IsActive
-				//orderby ai.MinimumAlimFiyati descending
 				select new AracIhale()
 				{
 					Id = ai.Id,
@@ -41,13 +41,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			return ihale;
 		}
 
-		public Task<List<AracIhale?>> IhaleIdyeGoreIhaledekiAracFiyatBilgileriniGetir(int ihaleId)
+		public async Task<List<AracIhale?>> IhaleIdyeGoreIhaledekiAracFiyatBilgileriniGetir(int ihaleId)
 		{
-			var ihale= (from ai in _context.AracIhale
+			var ihale= await (from ai in _context.AracIhale
 					join ih in _context.Ihale on ai.IhaleId equals ih.Id
 					join a in _context.Arac on ai.AracId equals a.Id
 					where ai.IhaleId == ihaleId && ai.IsActive
-					//orderby ai.MinimumAlimFiyati descending
 					select new AracIhale()
 					{
 						Id = ai.Id,

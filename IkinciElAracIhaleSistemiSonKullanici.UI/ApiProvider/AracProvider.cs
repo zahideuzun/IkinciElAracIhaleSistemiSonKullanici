@@ -1,6 +1,9 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs;
+﻿using IkinciElAracIhaleSistemi.Entities.Entities;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using Newtonsoft.Json;
+using System.Text;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 {
@@ -29,6 +32,14 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 			ProviderBase<AracIhaleDTO> ihale = new ProviderBase<AracIhaleDTO>(_httpClient);
 
 			return await ihale.ProviderBaseGetAsync($"Arac/AracIhaleFiyat/{aracId}");
+		}
+
+		public async Task<Result> IhaledekiAracaTeklifVerme(IhaleTeklifVermeDTO teklif)
+		{
+			ProviderBase<IhaleTeklifVermeDTO> teklifBilgisi = new ProviderBase<IhaleTeklifVermeDTO>(_httpClient);
+			
+			return await teklifBilgisi.ProviderBasePostAsync<Result>($"Arac/AracIhaleTeklif", teklif);
+
 		}
 
 	}

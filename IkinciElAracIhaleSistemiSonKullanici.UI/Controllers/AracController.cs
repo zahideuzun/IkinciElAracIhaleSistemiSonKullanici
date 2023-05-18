@@ -1,22 +1,24 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
 using IkinciElAracIhaleSistemiSonKullanici.UI.Models;
 using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 {
+	[Authorize]
 	public class AracController : Controller
 	{
 		private readonly AracProvider _provider;
-		private readonly IhaleProvider _ihaleProvider;
+		
 
-		public AracController(AracProvider provider, IhaleProvider ihaleProvider)
+		public AracController(AracProvider provider)
 		{
 			_provider = provider;
-			_ihaleProvider = ihaleProvider;
 		}
 		public IActionResult Index()
 		{
@@ -26,14 +28,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 		[HttpGet]
 		public async Task<IActionResult> AracDetay(int id)
 		{
-			//var ihaledekiAraclar = await _provider.IhaledekiAracOzellikleriniGetir(id);
-			//var aracinFiyatBilgisi = await _ihaleProvider.AracIdyeGoreIhaleFiyatlariniGetir(id);
-			////todo tempdata kontrol et??
-			//TempData["aracId"] = id.ToString();
-			//string araIhaleJson = TempData["araIhaleFiyat"] as string;
-			//var araIhaleFiyat = JsonConvert.DeserializeObject<AracIhaleDTO>(araIhaleJson);
-			//ViewBag.AracId = aracinFiyatBilgisi.AracId;
-
 			var ihaledekiAraclar = await _provider.IhaledekiAracOzellikleriniGetir(id);
 			var aracinFiyatBilgisi = await _provider.AracIdyeGoreAracIhaleFiyatiniGetir(id);
 
@@ -46,7 +40,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 
 			TempData["AracId"] = aracinFiyatBilgisi.AracId.ToString();
 
-			//return View(Tuple.Create(ihaledekiAraclar, aracinFiyatBilgisi));
 			return View(model);
 		}
 
@@ -63,7 +56,16 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
             teklif.UyeId = sessiondakiUyeBilgisi.UyeId;
 			teklif.TeklifTarihi = DateTime.Now;
             teklif.OnaylandiMi = false;
-           return RedirectToAction("Index", "Arac", new { id= aracId});
+
+			var sonuc = await _provider.IhaledekiAracaTeklifVerme(teklif);
+
+			if (sonuc.IsSuccessful)
+			{
+				return RedirectToAction("AracDetay", "Arac", new { id = aracId });
+			}
+
+			return BadRequest();
+
 		}
 	}
 }

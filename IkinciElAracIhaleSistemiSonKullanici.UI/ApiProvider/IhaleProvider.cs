@@ -1,5 +1,8 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Enums;
+using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
 using Newtonsoft.Json;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
@@ -12,20 +15,36 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
         {
             _httpClient = httpClient;
         }
-        public async Task<List<IhaleBilgisiDTO>?> IhaleListesiniGetir()
+        public async Task<List<IhaleBilgisiDTO>?> IhaleListesiniGetir(int id)
         {
-	        //ProviderBase<List<IhaleBilgisiDTO>> ihale = new ProviderBase<List<IhaleBilgisiDTO>>(_httpClient);
-
-	        //return await ihale.ProviderBaseListGetAsync("Ihale/Index");
-
+	        
 			List<IhaleBilgisiDTO>? listem = null;
-            var responseMessage = await _httpClient.GetAsync("Ihale/Index");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                listem = JsonConvert.DeserializeObject<List<IhaleBilgisiDTO>>(await responseMessage.Content.ReadAsStringAsync());
-            }
 
-            return listem;
+			switch (id)
+			{
+				case (int) UyeTurleri.Kurumsal:
+				{
+					var responseMessage = await _httpClient.GetAsync("Ihale/Index");
+					if (responseMessage.IsSuccessStatusCode)
+					{
+						listem = JsonConvert.DeserializeObject<List<IhaleBilgisiDTO>>(await responseMessage.Content.ReadAsStringAsync());
+					}
+
+					break;
+				}
+				case (int)UyeTurleri.Bireysel:
+				{
+					var responseMessage = await _httpClient.GetAsync("Ihale/BireyselIhale");
+					if (responseMessage.IsSuccessStatusCode)
+					{
+						listem = JsonConvert.DeserializeObject<List<IhaleBilgisiDTO>>(await responseMessage.Content.ReadAsStringAsync());
+					}
+
+					break;
+				}
+			}
+
+			return listem;
         }
 
         
@@ -82,6 +101,16 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 	        return listem;
 
         }
+        public async Task<List<IhaleBilgisiDTO?>> BireyselIhaleleriGetir()
+        {
+	        List<IhaleBilgisiDTO>? listem = null;
+	        var responseMessage = await _httpClient.GetAsync($"Ihale/BireyselIhale");
+	        if (responseMessage.IsSuccessStatusCode)
+	        {
+		        listem = JsonConvert.DeserializeObject<List<IhaleBilgisiDTO>>(await responseMessage.Content.ReadAsStringAsync());
+	        }
+	        return listem;
 
+        }
 	}
 }

@@ -8,6 +8,7 @@ using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI
@@ -22,6 +23,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
+			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(o => o.LoginPath = new PathString("/Giris/Index"));
 
 			#region MappingConfiguration
 
@@ -78,7 +81,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 			builder.Services.AddScoped<ISayfaManager, SayfaManager>();
 			builder.Services.AddScoped<ISayfaRepository, SayfaRepository>();
 
-
 			#endregion
 
 
@@ -102,8 +104,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseAuthentication();
+			app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",

@@ -46,6 +46,13 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 			return BaseActionType.ReturnResponse(ihaleListesi);
 		}
 
+		[HttpGet("BireyselIhale")]
+		public async Task<IActionResult> BireyselIhaleGetir()
+		{
+			var ihaleListesi = await _ihaleManager.BireyselIhaleleriGetir();
+			return BaseActionType.ReturnResponse(ihaleListesi);
+		}
+
 		[HttpGet("KurumsalIhale/{firmaId}")]
 		public async Task<IActionResult> IdyeGoreKurumsalIhaleGetir(int firmaId)
 		{

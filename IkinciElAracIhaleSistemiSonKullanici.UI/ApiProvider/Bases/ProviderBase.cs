@@ -1,6 +1,7 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Text;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 {
@@ -38,5 +39,23 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 			}
 			return test;
 		}
+
+		public async Task<T> ProviderBasePostAsync<T>(string uriPath, object data)
+		{
+			var json = JsonConvert.SerializeObject(data);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+			var response = await _httpClient.PostAsync(uriPath, content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				var resultJson = await response.Content.ReadAsStringAsync();
+				var result = JsonConvert.DeserializeObject<T>(resultJson);
+				return result;
+			}
+
+			return default(T);
+		}
+
 	}
 }

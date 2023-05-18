@@ -37,6 +37,9 @@
     <Reference Include="IkinciElAracIhaleSistemiSonKullanici.EF">
       <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.EF\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.EF.dll</HintPath>
     </Reference>
+    <Reference Include="IkinciElAracIhaleSistemiSonKullanici.Validation">
+      <HintPath>..\..\IkinciElAracIhaleSistemiSonKullaniciBase\IkinciElAracIhaleSistemiSonKullanici.Validation\bin\Debug\net7.0\IkinciElAracIhaleSistemiSonKullanici.Validation.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

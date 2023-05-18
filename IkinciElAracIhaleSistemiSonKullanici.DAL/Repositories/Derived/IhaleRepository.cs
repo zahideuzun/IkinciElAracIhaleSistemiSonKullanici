@@ -28,9 +28,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 		public async Task<Ihale> IdyeGoreIhaleGetir(int id)
 		{
 			var IdyeGoreIhale = TumIhaleleriGetir().Result.SingleOrDefault(a => a.Id == id);
-
 			return IdyeGoreIhale;
-
 		}
 
 		public async Task<List<Ihale>> TumKurumsalIhaleleriGetir()
@@ -44,13 +42,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			
 			return kurumsalIhaleler;
 		}
-		public async Task<List<Ihale>> BireyselIhaleleriGetir(int id)
+		public async Task<List<Ihale>> BireyselIhaleleriGetir()
 		{
 			var kurumsalIhaleler = TumIhaleleriGetir().Result.Where(a => a.IhaleTuruId == (int)IhaleTurleri.Bireysel).ToList();
 
 			return kurumsalIhaleler;
 		}
-
 
 		public async Task<List<Ihale>> TumIhaleleriGetir()
 		{

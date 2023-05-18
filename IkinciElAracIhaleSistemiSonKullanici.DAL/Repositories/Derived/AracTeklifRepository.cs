@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
 using IkinciElAracIhaleSistemiSonKullanici.EF;
+using IkinciElAracIhaleSistemiSonKullanici.UI.Validations;
 using Microsoft.EntityFrameworkCore;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
@@ -25,22 +28,33 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			_context = context;
 		}
 
-		public async Task<AracTeklif> IhaledekiAracaTeklifVerme(IhaleTeklifVermeDTO teklifDto)
+		public Result IhaledekiAracaTeklifVerme(IhaleTeklifVermeDTO aracTeklif)
 		{
+			var validator = new AracTeklifValidator(aracTeklif);
+			validator.OnValidate(); 
+
+			if (!validator.IsValid)
+			{
+				string validationErrors = string.Join(Environment.NewLine, validator.ValidationMessages);
+				return new ErrorResult(validationErrors); 
+			}
 
 			var yeniAracTeklif = new AracTeklif()
 			{
-				AracIhaleId = teklifDto.AracIhaleId,
-				TeklifEdilenFiyat = teklifDto.TeklifEdilenFiyat,
+				AracIhaleId = aracTeklif.AracIhaleId,
+				TeklifEdilenFiyat = aracTeklif.TeklifEdilenFiyat,
 				OnaylandiMi = false,
-				UyeId = teklifDto.UyeId,
+				UyeId = aracTeklif.UyeId,
 				TeklifTarihi = DateTime.Now
 			};
 
 			_context.AracTeklif.Add(yeniAracTeklif);
-			await _context.SaveChangesAsync();
-
-			return yeniAracTeklif;
+			_context.SaveChanges();
+			if (_context.SaveChanges() >0)
+			{
+				return new SuccessResult("Teklifiniz kaydedildi!");
+			}
+			return new ErrorResult("Teklif kaydedilemedi!");
 		}
 	}
 }

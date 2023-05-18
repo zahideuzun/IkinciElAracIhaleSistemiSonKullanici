@@ -15,9 +15,15 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
             _mapper = mapper;
         }
 
-        //todo ihale statu durumunu tarihe göre otomatik degistir
+		public async Task<List<IhaleBilgisiDTO>> BireyselIhaleleriGetir()
+		{
+			var ihaleler = await _repository.BireyselIhaleleriGetir();
+			return _mapper.Map<List<IhaleBilgisiDTO>>(ihaleler);
+		}
 
-        public async Task<IhaleBilgisiDTO?> IdyeGoreIhaleGetir(int id)
+		//todo ihale statu durumunu tarihe göre otomatik degistir
+
+		public async Task<IhaleBilgisiDTO?> IdyeGoreIhaleGetir(int id)
         {
 	        var idyeGoreIhale = await _repository.IdyeGoreIhaleGetir(id);
 	        return _mapper.Map<IhaleBilgisiDTO>(idyeGoreIhale);

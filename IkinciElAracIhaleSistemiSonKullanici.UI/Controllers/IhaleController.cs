@@ -1,45 +1,46 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
+﻿using IkinciElAracIhaleSistemi.Entities.VM.Enum;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
+using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
+using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 {
-    public class IhaleController : Controller
-    {
-        private readonly IhaleProvider _ihaleProvider;
-        private readonly AracProvider _aracProvider;
-        public IhaleController(IhaleProvider ihaleProvider, AracProvider aracProvider)
-        {
-            _ihaleProvider = ihaleProvider;
-            _aracProvider = aracProvider;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var ihaleListesi = await _ihaleProvider.IhaleListesiniGetir();
-
-            return View(ihaleListesi);
-        }
-        [HttpGet]
-        public async Task<IActionResult> KurumsalIhale()
-        {
-	        var ihaleListesi = await _ihaleProvider.KurumsalIhaleleriGetir();
-
-	        return View(ihaleListesi);
-        }
+	[Authorize]
+	public class IhaleController : Controller
+	{
+		private readonly IhaleProvider _ihaleProvider;
+		public IhaleController(IhaleProvider ihaleProvider)
+		{
+			_ihaleProvider = ihaleProvider;
+		}
 
 		[HttpGet]
-        public async Task<IActionResult> IhaleDetay(int id)
-        {
-	        ViewBag.IhaleBilgisi = await _ihaleProvider.IdyeGoreIhaleGetir(id);
-	        var ihaledekiAracFiyatBilgileri =  await _ihaleProvider.IhaleIdyeGoreAracFiyatlariniGetir(id);
-			// todo tempdata bilgisi gelecek
-			//TempData["araIhaleFiyat"] = JsonConvert.SerializeObject(ihaledekiAracFiyatBilgileri);
-			var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
-	        return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri));
-        }
+		public async Task<IActionResult> Index()
+		{
+			var sessiondakiUyeBilgisi = HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
+			var ihaleler = await _ihaleProvider.IhaleListesiniGetir(sessiondakiUyeBilgisi.UyeTuruId);
+			return View(ihaleler);
+		}
+		[HttpGet]
+		public async Task<IActionResult> KurumsalIhale()
+		{
+			var ihaleler = await _ihaleProvider.KurumsalIhaleleriGetir();
+			return View(ihaleler);
+		}
 
-        
-    }
+		[HttpGet]
+		public async Task<IActionResult> IhaleDetay(int id)
+		{
+			ViewBag.IhaleBilgisi = await _ihaleProvider.IdyeGoreIhaleGetir(id);
+			var ihaledekiAracFiyatBilgileri = await _ihaleProvider.IhaleIdyeGoreAracFiyatlariniGetir(id);
+			var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
+			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri));
+		}
+
+
+	}
 }

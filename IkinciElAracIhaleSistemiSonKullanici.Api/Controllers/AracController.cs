@@ -1,4 +1,5 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,14 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 		{
 			var ihale = await _aracIhaleManager.AracIdyeGoreIhaledekiAracFiyatBilgisiniGetir(aracId);
 			return BaseActionType.ReturnResponse(ihale);
+		}
+
+		[HttpPost("AracIhaleTeklif")]
+		public async Task<IActionResult> IhaledekiAracaTeklifVer([FromBody] IhaleTeklifVermeDTO teklif)
+		{
+			var teklifResult = _aracTeklifManager.IhaledekiAracaYeniTeklifVerme(teklif);
+
+			return BaseActionType.ReturnResponse(teklifResult);
 		}
 	}
 }

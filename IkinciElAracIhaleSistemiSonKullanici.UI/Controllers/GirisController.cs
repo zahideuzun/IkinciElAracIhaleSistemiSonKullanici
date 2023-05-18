@@ -1,26 +1,25 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper;
+﻿using System.Security.Claims;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.RolYetkiDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
-using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
 using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 {
-    //todo authentication??
-    public class GirisController : Controller
+    [AllowAnonymous]
+	public class GirisController : Controller
     {
         private readonly GirisProvider _provider;
         private readonly CacheHelper _cacheHelper;
-        private readonly IUyeManager _uyeManager;
 
-        public GirisController(GirisProvider provider, IUyeManager uyeManager, CacheHelper cacheHelper)
+        public GirisController(GirisProvider provider, CacheHelper cacheHelper)
         {
             _provider = provider;
-            _uyeManager = uyeManager;
             _cacheHelper = cacheHelper;
         }
 
@@ -49,12 +48,34 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
             {
                 return await _provider.RoleGoreSayfalariDuzenle(girisYapanUye.Data.RolId);
             }, TimeSpan.FromMinutes(30));
-
-            return RedirectToAction("Index", "Default");
+            
+            //uye authenticationi yapildi
+            await AuthenticationAsync(uye);
+			return RedirectToAction("Index", "Default");
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Cikis()
+        {
+	        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+	        HttpContext.Session.Clear();
+	        return RedirectToAction("Index","Giris");
+        }
+
         [NonAction]
+        public async Task AuthenticationAsync(UyeGirisDTO uye)
+        {
+	        var claims = new[] { new Claim(ClaimTypes.Name, uye.Email) };
+
+	        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+	        await HttpContext.SignInAsync(
+		        CookieAuthenticationDefaults.AuthenticationScheme,
+		        new ClaimsPrincipal(identity));
+        }
+
+		[NonAction]
         public async Task<List<UyeYetkiSayfaDTO>> CacheAt(int rolId)
         {
             var sayfalar = await _cacheHelper.CreateAndCacheList("RolSayfaCacheKey", async () =>

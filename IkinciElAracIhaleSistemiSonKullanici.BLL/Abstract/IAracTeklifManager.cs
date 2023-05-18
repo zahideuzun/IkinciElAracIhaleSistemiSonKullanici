@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract
 {
 	public interface IAracTeklifManager
 	{
-		public Task<IhaleTeklifVermeDTO> IhaledekiAracaYeniTeklifVerme(IhaleTeklifVermeDTO teklifDto);
+		public Result IhaledekiAracaYeniTeklifVerme(IhaleTeklifVermeDTO teklifDto);
 	}
 }

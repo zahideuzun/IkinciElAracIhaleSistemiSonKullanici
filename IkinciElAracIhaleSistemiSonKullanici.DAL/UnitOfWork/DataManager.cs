@@ -13,6 +13,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork
     public class DataManager
     {
         public AracIhaleContext Context { get; }
+
         public DataManager()
         {
             Context = new AracIhaleContext();
