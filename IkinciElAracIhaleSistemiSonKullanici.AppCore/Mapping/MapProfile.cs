@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs;

@@ -1,12 +1,11 @@
-﻿using IkinciElAracIhaleSistemi.Entities.Entities;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     [ApiController]
     public class GirisController : ControllerBase
     {

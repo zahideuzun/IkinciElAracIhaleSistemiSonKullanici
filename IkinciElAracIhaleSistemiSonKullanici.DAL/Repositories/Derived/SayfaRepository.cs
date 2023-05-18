@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using IkinciElAracIhaleSistemi.Entities.Entities;
+﻿using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 using IkinciElAracIhaleSistemiSonKullanici.EF;

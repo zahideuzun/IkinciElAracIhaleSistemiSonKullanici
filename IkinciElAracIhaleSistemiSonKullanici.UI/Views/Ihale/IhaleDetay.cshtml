@@ -1,6 +1,6 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
-@using IkinciElAracIhaleSistemi.Entities.VM.Enum
+
 
 @model Tuple<List<AracBilgiDTO>,List<AracIhaleDTO>, IhaleBilgisiDTO>
 
@@ -70,28 +70,27 @@
 
 							</div>
 							<div class="column pr-img-gd text-lg-center">
-								@if (Model.Item3.IhaleBaslangicTarihi < DateTime.Now)
+								@if (Model.Item3.IhaleBaslangicTarihi < DateTime.Now && Model.Item3.IhaleBitisTarihi < DateTime.Now)
 								{
-									<div class="column price-number text-md-right">
+									<div class="column price-number text-md-center">
 				                
-										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Araç Detay</a>
+										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Detay</a>
 									</div>
 								}
 								@if ((DateTime.Now < Model.Item3.IhaleBitisTarihi) && (Model.Item3.IhaleBaslangicTarihi < DateTime.Now))
 								{
-									<div class="column price-number text-md-right">
+									<div class="column price-number text-md-center">
 
-										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
+										<a class="btn btn-style btn btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
 									</div>
 								}
-								@if (Model.Item3.IhaleBitisTarihi < DateTime.Now)
+								@*@if (Model.Item3.IhaleBitisTarihi < DateTime.Now)
 								{
-									<div class="column price-number text-md-right">
-										<button type="button" class="btn btn-dribbble" data-toggle="modal" data-target="#teklifler">Teklifler</button>
-										@*<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklifler</a>*@
+									<div class="column price-number text-md-center">
+
+										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Detay</a>
 									</div>
-									
-								}
+								}*@
 
 							</div>
 			               

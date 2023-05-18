@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper
 {
-    public class CacheHelper
+	public class CacheHelper
     {
         private readonly IMemoryCache _cache;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.MarkaDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.MarkaDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.ModelDTOs;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs

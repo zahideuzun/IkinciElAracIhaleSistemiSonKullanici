@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
-using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.Enums;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 {
-    public class UyeManager : IUyeManager
+	public class UyeManager : IUyeManager
     {
 		private readonly IUyeRepository _repository;
 		private readonly IMapper _mapper;

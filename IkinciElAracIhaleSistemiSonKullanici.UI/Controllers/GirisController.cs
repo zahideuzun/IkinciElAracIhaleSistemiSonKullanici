@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Security.Claims;
-using IkinciElAracIhaleSistemi.Entities.Entities;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
@@ -10,10 +7,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Security.Claims;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 {
-    [AllowAnonymous]
+	[AllowAnonymous]
 	public class GirisController : Controller
     {
         private readonly GirisProvider _provider;

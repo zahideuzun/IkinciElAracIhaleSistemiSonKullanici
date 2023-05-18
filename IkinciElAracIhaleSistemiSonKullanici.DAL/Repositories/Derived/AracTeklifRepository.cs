@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IkinciElAracIhaleSistemi.Entities.Entities;
+﻿using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
-using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
 using IkinciElAracIhaleSistemiSonKullanici.EF;
-using IkinciElAracIhaleSistemiSonKullanici.UI.Validations;
 using Microsoft.EntityFrameworkCore;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
@@ -49,6 +42,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
             return ihale;
         }
 
+		//todo teklif girildiginde aracin min alim fiyatini degistir!!
+		//todo min alim fiyati hep en son girilen teklifi getirsin!!
         public async Task<Result> IhaledekiAracaTeklifVerme(AracTeklifDTO aracTeklif)
 		{
 			//var validator = new AracTeklifValidator(aracTeklif);
@@ -70,6 +65,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			};
 
 			_context.AracTeklif.Add(yeniAracTeklif);
+
 			if (_context.SaveChanges() >0)
 			{
 				return new SuccessResult("Teklifiniz kaydedildi!");

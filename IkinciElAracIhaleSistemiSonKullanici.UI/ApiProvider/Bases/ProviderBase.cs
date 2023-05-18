@@ -1,6 +1,4 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
-using Newtonsoft.Json;
-using System.Net.Http;
+﻿using Newtonsoft.Json;
 using System.Text;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider

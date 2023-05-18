@@ -1,16 +1,12 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
-using Newtonsoft.Json;
-using System.Net;
-using System.Text;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.RolYetkiDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 {
-    public class GirisProvider
+	public class GirisProvider
     {
         HttpClient _httpClient;
 

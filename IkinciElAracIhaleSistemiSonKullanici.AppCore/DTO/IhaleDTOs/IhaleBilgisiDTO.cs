@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
+﻿namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
-    public class IhaleBilgisiDTO
+	public class IhaleBilgisiDTO
     {
         //todo ihaleleri listeledigin yerde bilgileri ver
         public int IhaleId { get; set; }

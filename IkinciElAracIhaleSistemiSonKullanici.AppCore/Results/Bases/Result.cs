@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases
+﻿namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases
 {
-    public class Result
+	public class Result
     {
         public bool IsSuccessful { get; }
         public string Message { get; set; }

@@ -6,6 +6,7 @@
 @{
 	ViewData["Title"] = "AracDetay";
 	Layout = "~/Views/Shared/_UiLayout.cshtml";
+	int sira = 1;
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -43,34 +44,156 @@
 								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> İhale süreci tamamlandığında ihale sonucunun bilgisi sisteme kayıtlı olduğunuz mail adresiniz üzerinden tarafınıza iletilecektir. </li>
 								<hr/><hr/>
 							</div>
-							<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
-								<h5>
-									<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li> </h5>
-								<hr/>
-								<input type="text" name="TeklifEdilenFiyat" value="" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;"/>
-							</div>
+							
 						</div>
 						<hr/>
 						<div class="text-center">
-							<button type="submit" class="btn btn-style btn-primary">Teklif Ver</button>
+							@{
+								DateTime baslangicTarihi = DateTime.Parse(Model.BaslangicString);
+								DateTime bitisTarihi = DateTime.Parse(Model.BitisString);
+								DateTime bugun = DateTime.Today;
+
+								if (baslangicTarihi < bugun && bitisTarihi < bugun)
+								{
+									<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
+										<h5>
+											<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li> </h5>
+										<hr/>
+										<input type="text" name="TeklifEdilenFiyat" value="" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;" disabled/>
+									</div>
+									<hr />
+									<h5><li><span style="color: red;"><a href="#"> İHALE AKTİF DEĞİL </a></span></li></h5>
+
+									<hr/>
+									<button type="button" class="btn btn-style btn-primary">Teklif Girilemez</button>
+								}
+								else if (bitisTarihi > bugun && baslangicTarihi <= bugun)
+								{
+									<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
+										<h5>
+											<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li>
+										</h5>
+										<hr />
+										<input type="text" name="TeklifEdilenFiyat" value="" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;" />
+									</div>
+									<hr />
+									<h5><li><span style="color: red;"><a href="#"> İHALE AKTİF </a></span></li></h5>
+
+									<hr />
+									<button type="submit" class="btn btn-style btn-primary">Teklif Ver</button>
+								}
+							}
 						</div>
 					</form>
-					<div class="text-center">
-						@if (Model.AracTeklifleri.Count > 0)
-						{
-							<button type="button" class="btn btn-dribbble" data-toggle="modal" data-target="#teklifler"> Teklifler</button>
-						}
-						else
-						{
-							<p class="price-title">Araca ait teklif yoktur.</p>
-						}
+					<hr />
 						
-					</div>
+					@if (Model.AracTeklifleri.Count > 0)
+					{
+						<div class="column price-number text-md-right">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+								Teklifler
+							</button>
+										
+						</div>
+					}
+					else
+					{
+						<p class="price-title">Araca ait teklif yoktur.</p>
+					}
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+
+.
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<thead>
+					<tr>
+
+						<th scope="col">#</th>
+						<th scope="col">Teklif Tarihi</th>
+						<th scope="col">Teklif Fiyatı</th>
+
+					</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.AracTeklifleri)
+						{
+							<tr>
+								<td>@sira</td>
+								<td>@item.TeklifTarihi</td>
+								<td>@item.TeklifEdilenFiyat</td>
+
+							</tr>
+							sira++;
+						}
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="modal fade" id="#teklifler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Teklifler</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<thead>
+					<tr>
+						<th scope="col">Teklif Tarihi</th>
+						<th scope="col">Teklif Fiyatı</th>
+
+					</tr>
+					</thead>
+					<tbody>
+					@foreach (var item in (List<AracTeklifDTO>)Model.AracTeklifleri)
+					{
+						<tr>
+							<td>@item.TeklifTarihi</td>
+							<td>@item.TeklifEdilenFiyat</td>
+
+						</tr>
+					}
+					</tbody>
+				</table>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+			</div>
+		</div>
+	</div>
+</div>
 <section class="w3l-contact" id="contact">
 	<div class="contact-infubd py-5">
 		<div class="container py-lg-3">
@@ -164,46 +287,10 @@
 
 	</div>
 </section>
-<div class="modal fade" id="#teklifler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Teklifler</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">Teklif Tarihi</th>
-							<th scope="col">Teklif Fiyatı</th>
-
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var item in (List<AracTeklifDTO>)Model.AracTeklifleri)
-						{
-							<tr>
-								<td>@item.TeklifTarihi</td>
-								<td>@item.TeklifEdilenFiyat</td>
-
-							</tr>
-						}
-					</tbody>
-				</table>
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 
-<script>
+
+@*<script>
 	
 	function submitForm() {
 		
@@ -214,4 +301,4 @@
 
 		form.submit();
 	}
-</script>
+</script>*@

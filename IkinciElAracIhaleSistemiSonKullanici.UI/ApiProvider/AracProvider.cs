@@ -1,9 +1,7 @@
-﻿using IkinciElAracIhaleSistemi.Entities.Entities;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
-using Newtonsoft.Json;
-using System.Text;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Results.Bases;
+using Newtonsoft.Json;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 {

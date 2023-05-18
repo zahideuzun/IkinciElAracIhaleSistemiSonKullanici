@@ -1,13 +1,11 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.Enums;
-using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
 using Newtonsoft.Json;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 {
-    public class IhaleProvider
+	public class IhaleProvider
     {
         HttpClient _httpClient;
 

@@ -1,20 +1,12 @@
 ﻿using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemi.Entities.VM.Enum;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Context;
 using IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor;
-using IkinciElAracIhaleSistemiSonKullanici.DAL.UnitOfWork;
 using IkinciElAracIhaleSistemiSonKullanici.EF;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 {
-    public class IhaleRepository : EfRepositoryBase<AracIhaleContext, Ihale>, IIhaleRepository
+	public class IhaleRepository : EfRepositoryBase<AracIhaleContext, Ihale>, IIhaleRepository
     {
 	    private readonly AracIhaleContext _context;
 	    public IhaleRepository()

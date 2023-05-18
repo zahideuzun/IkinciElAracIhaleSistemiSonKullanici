@@ -1,7 +1,6 @@
 ﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers

@@ -1,5 +1,4 @@
-﻿using IkinciElAracIhaleSistemi.Entities.Entities;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Abstract

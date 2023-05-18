@@ -38,6 +38,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 			var idIhale = await _ihaleProvider.IdyeGoreIhaleGetir(id);
 			var ihaledekiAracFiyatBilgileri = await _ihaleProvider.IhaleIdyeGoreAracFiyatlariniGetir(id);
 			var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
+
+			TempData["ihaleBaslangic"] = idIhale.IhaleBaslangicTarihi.ToString();
+			TempData["ihaleBitis"] = idIhale.IhaleBitisTarihi.ToString();
+
 			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri, idIhale));
 		}
 
