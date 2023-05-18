@@ -30,12 +30,14 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 		{
 			var ihaledekiAraclar = await _provider.IhaledekiAracOzellikleriniGetir(id);
 			var aracinFiyatBilgisi = await _provider.AracIdyeGoreAracIhaleFiyatiniGetir(id);
+			var aracinTeklifleri = await _provider.IhaledekiAracTeklifleriniGetir(id);
 
 			var model = new AracDetayViewModel
 			{
 				IhaledekiAraclar = ihaledekiAraclar,
 				AracinFiyatBilgisi = aracinFiyatBilgisi,
-				AracId = aracinFiyatBilgisi.AracId
+				AracId = aracinFiyatBilgisi.AracId,
+				AracTeklifleri = aracinTeklifleri
 			};
 
 			TempData["AracId"] = aracinFiyatBilgisi.AracId.ToString();
@@ -44,7 +46,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> TeklifVer(IhaleTeklifVermeDTO teklif)
+		public async Task<IActionResult> TeklifVer(AracTeklifDTO teklif)
 		{
 			int aracId = 0;
 			if (TempData.ContainsKey("AracId"))
@@ -58,7 +60,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
             teklif.OnaylandiMi = false;
 
 			var sonuc = await _provider.IhaledekiAracaTeklifVerme(teklif);
-
 			if (sonuc.IsSuccessful)
 			{
 				return RedirectToAction("AracDetay", "Arac", new { id = aracId });

@@ -8,5 +8,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Models
 		public IEnumerable<OzellikDetayDTO> IhaledekiAraclar { get; set; }
 		public AracIhaleDTO AracinFiyatBilgisi { get; set; }
 		public int AracId { get; set; }
+		public List<AracTeklifDTO>? AracTeklifleri { get; internal set; }
 	}
 }

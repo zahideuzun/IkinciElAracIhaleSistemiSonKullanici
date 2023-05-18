@@ -28,16 +28,37 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			_context = context;
 		}
 
-		public Result IhaledekiAracaTeklifVerme(IhaleTeklifVermeDTO aracTeklif)
-		{
-			var validator = new AracTeklifValidator(aracTeklif);
-			validator.OnValidate(); 
+        public async Task<List<AracTeklif>> AracaVerilenTeklifleriGetir(int aracId)
+        {
+            var ihale =  await (from at in _context.AracTeklif
+                    join ai in _context.AracIhale on at.AracIhaleId equals ai.Id
+					join uy in _context.Uye on at.UyeId equals uy.Id
+                join ih in _context.Ihale on ai.IhaleId equals ih.Id
+                join a in _context.Arac on ai.AracId equals a.Id
+                where ai.AracId == aracId && ai.IsActive && ai.Id == at.AracIhaleId
+                select new AracTeklif()
+                {
+                    AracIhaleId = ai.Id,
+                    UyeId = ai.IhaleId,
+					TeklifEdilenFiyat = at.TeklifEdilenFiyat,
+					TeklifTarihi = at.TeklifTarihi,
+					OnaylandiMi = at.OnaylandiMi,
+					AracIhale = at.AracIhale
+                }).ToListAsync();
 
-			if (!validator.IsValid)
-			{
-				string validationErrors = string.Join(Environment.NewLine, validator.ValidationMessages);
-				return new ErrorResult(validationErrors); 
-			}
+            return ihale;
+        }
+
+        public async Task<Result> IhaledekiAracaTeklifVerme(AracTeklifDTO aracTeklif)
+		{
+			//var validator = new AracTeklifValidator(aracTeklif);
+			//validator.OnValidate();
+
+			//if (!validator.IsValid)
+			//{
+			//	string validationErrors = string.Join(Environment.NewLine, validator.ValidationMessages);
+			//	return new ErrorResult(validationErrors);
+			//}
 
 			var yeniAracTeklif = new AracTeklif()
 			{
@@ -49,7 +70,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			};
 
 			_context.AracTeklif.Add(yeniAracTeklif);
-			_context.SaveChanges();
 			if (_context.SaveChanges() >0)
 			{
 				return new SuccessResult("Teklifiniz kaydedildi!");

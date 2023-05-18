@@ -5,9 +5,9 @@ using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Validations
 {
-	public class AracTeklifValidator : ValidatorBase<IhaleTeklifVermeDTO>
+	public class AracTeklifValidator : ValidatorBase<AracTeklifDTO>
 	{
-		public AracTeklifValidator(IhaleTeklifVermeDTO model) : base(model)
+		public AracTeklifValidator(AracTeklifDTO model) : base(model)
 		{
 
 		}

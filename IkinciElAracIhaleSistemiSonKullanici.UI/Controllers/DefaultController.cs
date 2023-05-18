@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 {
-	[Authorize]
+    [Authorize]
     public class DefaultController : Controller
     {
         public async Task<IActionResult> Index()

@@ -7,6 +7,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Infrastructor
 {
 	public interface IAracTeklifRepository : IInsertableRepo<AracTeklif>
 	{
-		public Result IhaledekiAracaTeklifVerme(IhaleTeklifVermeDTO teklifDto);
-	}
+		public Task<Result> IhaledekiAracaTeklifVerme(AracTeklifDTO teklifDto);
+
+        public Task<List<AracTeklif>> AracaVerilenTeklifleriGetir(int aracId);
+    }
 }

@@ -26,6 +26,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 
 			return listem;
 		}
+		public async Task<List<AracTeklifDTO>?> IhaledekiAracTeklifleriniGetir(int aracId)
+		{
+			List<AracTeklifDTO>? listem = null;
+			var responseMessage = await _httpClient.GetAsync($"Arac/AracIhaleTeklif/{aracId}");
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				listem = JsonConvert.DeserializeObject<List<AracTeklifDTO>>(await responseMessage.Content.ReadAsStringAsync());
+			}
+
+			return listem;
+		}
 
 		public async Task<AracIhaleDTO?> AracIdyeGoreAracIhaleFiyatiniGetir(int aracId)
 		{
@@ -33,10 +44,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 
 			return await ihale.ProviderBaseGetAsync($"Arac/AracIhaleFiyat/{aracId}");
 		}
-
-		public async Task<Result> IhaledekiAracaTeklifVerme(IhaleTeklifVermeDTO teklif)
+		
+		public async Task<Result> IhaledekiAracaTeklifVerme(AracTeklifDTO teklif)
 		{
-			ProviderBase<IhaleTeklifVermeDTO> teklifBilgisi = new ProviderBase<IhaleTeklifVermeDTO>(_httpClient);
+			ProviderBase<AracTeklifDTO> teklifBilgisi = new ProviderBase<AracTeklifDTO>(_httpClient);
 			
 			return await teklifBilgisi.ProviderBasePostAsync<Result>($"Arac/AracIhaleTeklif", teklif);
 

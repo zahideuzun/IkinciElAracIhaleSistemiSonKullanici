@@ -16,7 +16,14 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 			_repository = repository;
 			_mapper = mapper;
 		}
-		public Result IhaledekiAracaYeniTeklifVerme(IhaleTeklifVermeDTO teklifDto)
+
+        public async Task<List<AracTeklifDTO>> AracaVerilenTeklifleriGetir(int aracId)
+        {
+            var teklifler = await _repository.AracaVerilenTeklifleriGetir(aracId);
+            return _mapper.Map<List<AracTeklifDTO>>(teklifler);
+        }
+
+        public Task<Result> IhaledekiAracaYeniTeklifVerme(AracTeklifDTO teklifDto)
 		{
 			var deneme = _repository.IhaledekiAracaTeklifVerme(teklifDto);
 			return deneme;

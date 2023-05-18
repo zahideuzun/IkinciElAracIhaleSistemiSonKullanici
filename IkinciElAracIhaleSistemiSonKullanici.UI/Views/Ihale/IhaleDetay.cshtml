@@ -15,7 +15,23 @@
 			<h2 class="title">@Model.Item3.IhaleAdi</h2>
 			<ul class="breadcrumbs-custom-path mt-2">
 				<h5>
-				<li><a href="#"> @Model.Item3.Statu </a></li> </h5>
+					@{
+						if ((Model.Item3.IhaleBaslangicTarihi < DateTime.Now)&& (Model.Item3.IhaleBitisTarihi > DateTime.Now))
+						{
+							<li><a href="#"> Başladı </a></li>
+						
+						}
+						else if ((DateTime.Now < Model.Item3.IhaleBaslangicTarihi))
+						{
+							<li><a href="#"> Başlamadı </a></li>
+						}
+						else if (Model.Item3.IhaleBitisTarihi < DateTime.Now)
+						{
+							<li><a href="#"> Bitti </a></li>
+						}
+					}
+
+				</h5>
 				
 				<hr/>
 				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @Model.Item3.IhaleBaslangicTarihi.ToShortDateString() -> 18:20 </li>
@@ -26,67 +42,104 @@
 	</div>
 </section>
 <section class="w3l-pricinghny">
-    <div class="pricing-inner-info py-5">
-        <div class="container py-lg-4">
-            <!--/pricing-info-grids-->
-            <div class="pricing-info-grids">
-	            <!--/box-->
-                @foreach (var item in Model.Item1)
-                {
-	                <div class="price-box">
-		                <div class="grid grid-column-2">
-			                <div class="column pr-img-gd">
-				                <h6 class="pricehead">
-					                <span class="fa fa-delicious mr-2" aria-hidden="true"></span> @item.Plaka
-				                </h6>
-			                </div>
+	<div class="pricing-inner-info py-5">
+		<div class="container py-lg-4">
+			<!--/pricing-info-grids-->
+			<div class="pricing-info-grids">
+				<!--/box-->
+				@foreach (var item in Model.Item1)
+				{
+					<div class="price-box">
+						<div class="grid grid-column-2">
+							<div class="column pr-img-gd">
+								<h6 class="pricehead">
+									<span class="fa fa-delicious mr-2" aria-hidden="true"></span> @item.Plaka
+								</h6>
+							</div>
 							<div class="column pr-img-gd text-lg-center">
-				                <p class="price-title">@item.Marka.MarkaAdi</p>
-				                <p class="price-title">@item.Model.ModelAdi</p>
-				                <p class="price-title">@item.Km KM</p>
-			                </div>
-			                @foreach (var item2 in Model.Item2.Where(item2 => item.Id == item2.AracId))
-			                {
-								<p class="price-title">İhale Başlangıç Fiyatı: &nbsp;@item2.IhaleBaslangicFiyati</p>
-				                <p class="price-title"></p>
-				                <br/>
-								<p class="price-title">Minimum Alım Fiyatı: &nbsp; @item2.MinimumAlimFiyati</p>
-				                <p class="price-title"></p>
-			                }
-			                <div class="column price-number text-md-right">
+
+								<p class="price-title">@item.Marka.MarkaAdi</p>
+								<p class="price-title">@item.Model.ModelAdi</p>
+								<p class="price-title">@item.Km KM</p>
+								@foreach (var item2 in Model.Item2.Where(item2 => item.Id == item2.AracId))
+								{
+									<p class="price-title">İhale Başlangıç Fiyatı: &nbsp;@item2.IhaleBaslangicFiyati</p>
+									<br />
+									<p class="price-title">Minimum Alım Fiyatı: &nbsp; @item2.MinimumAlimFiyati</p>
+								}
+
+							</div>
+							<div class="column pr-img-gd text-lg-center">
+								@if (Model.Item3.IhaleBaslangicTarihi < DateTime.Now)
+								{
+									<div class="column price-number text-md-right">
 				                
-				                <a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
-			                </div>
-							@*@if (Model.Item3.Statu == "Başladı")
-							{
-								<div class="column price-number text-md-right">
-				                
-									<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
-								</div>
-							}
-							@if (Model.Item3.Statu == "Bitti")
-							{
-								<div class="column price-number text-md-right">
+										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Araç Detay</a>
+									</div>
+								}
+								@if ((DateTime.Now < Model.Item3.IhaleBitisTarihi) && (Model.Item3.IhaleBaslangicTarihi < DateTime.Now))
+								{
+									<div class="column price-number text-md-right">
 
-									<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklifleri Gör</a>
-								</div>
-							}
-			                @if (Model.Item3.Statu == IhaleStatuleri.Baslamadi.ToString())
-			                {
-				                <div class="column price-number text-md-right">
+										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
+									</div>
+								}
+								@if (Model.Item3.IhaleBitisTarihi < DateTime.Now)
+								{
+									<div class="column price-number text-md-right">
+										<button type="button" class="btn btn-dribbble" data-toggle="modal" data-target="#teklifler">Teklifler</button>
+										@*<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklifler</a>*@
+									</div>
+									
+								}
 
-					                <a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Arac Detay Gör</a>
-				                </div>
-			                }*@
-			                
-		                </div>
-	                </div>
+							</div>
+			               
+						</div>
+					</div>
 
-                }
+				}
 
-            </div>
-            <!--/pricing-info-grids-->
-        </div>
-    </div>
+			</div>
+			<!--/pricing-info-grids-->
+		</div>
+	</div>
 </section>
+<div class="modal fade" id="teklifler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Teklifler</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<thead>
+					<tr>
+						<th scope="col">Parça Adı</th>
+						<th scope="col">Durumu</th>
+
+					</tr>
+					</thead>
+					<tbody>
+					@*@foreach (var item in (List<>)ViewBag.AracTramerDetaylari)
+					{
+						<tr>
+							<td>@item.ParcaAdi</td>
+							<td>@item.DurumAdi</td>
+
+						</tr>
+					}*@
+					</tbody>
+				</table>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+			</div>
+		</div>
+	</div>
+</div>
 

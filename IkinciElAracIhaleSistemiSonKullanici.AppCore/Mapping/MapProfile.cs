@@ -20,8 +20,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping
 	{
 		public MapProfile()
 		{
-			CreateMap<AracTeklif, IhaleTeklifVermeDTO>();
-			CreateMap<IhaleTeklifVermeDTO, AracTeklif>();
+			CreateMap<AracTeklif, AracTeklifDTO>();
+			CreateMap<AracTeklifDTO, AracTeklif>();
 
 			CreateMap<IhaleBilgisiDTO, Ihale>()
 				.ForMember(a => a.Id, opt => opt.MapFrom(x => x.IhaleId));
@@ -36,8 +36,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.Mapping
 			CreateMap<AracBilgiDTO, Arac>();
 			CreateMap<Arac, AracBilgiDTO>();
 
-			CreateMap<IhaleTeklifVermeDTO, AracTeklif>();
-			CreateMap<AracTeklif, IhaleTeklifVermeDTO>();
+			CreateMap<AracTeklifDTO, AracTeklif>();
+			CreateMap<AracTeklif, AracTeklifDTO>();
 
 			CreateMap<UyeGirisDTO, Uye>();
 			CreateMap<Uye, UyeGirisDTO>();

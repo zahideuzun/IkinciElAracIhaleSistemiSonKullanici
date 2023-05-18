@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Net;
+using System.Security.Claims;
+using IkinciElAracIhaleSistemi.Entities.Entities;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.CacheHelper;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
@@ -39,6 +41,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 
             //uye bilgisini sessionda tutuyoruz.
             var girisYapanUye = await _provider.KullaniciGirisKontrolTask(uye);
+
+            if (girisYapanUye.StatusCode != HttpStatusCode.OK)
+            {
+                ViewBag.HataMesaji = "Kullanıcı adı veya şifre hatalı";
+                return View("Index");
+			}
             HttpContext.Session.MySessionSet("girisYapanUye", girisYapanUye.Data);
 
             //todo daha efektif nasil yazilir? giris yapan uyenin rol bilgisi uye turune gore farkli tablodan geldigi icin rol bilgisini uye giris yaptiktan sonra kontrol etmek durumunda kaldim. ortak bir dto yapilip kontrol edilebilir mi?
@@ -51,9 +59,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
             
             //uye authenticationi yapildi
             await AuthenticationAsync(uye);
-			return RedirectToAction("Index", "Default");
+            return RedirectToAction("Index", "Default");
 
-        }
+		}
 
         [HttpGet]
         public async Task<IActionResult> Cikis()
