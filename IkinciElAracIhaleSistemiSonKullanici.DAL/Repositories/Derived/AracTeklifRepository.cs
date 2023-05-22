@@ -55,8 +55,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			//	return new ErrorResult(validationErrors);
 			//}
 
-			//var aracIhale = _context.AracIhale.SingleOrDefault(a => a.Id == aracTeklif.AracIhaleId);
-
+			var aracIhale = _context.AracIhale.SingleOrDefault(a => a.Id == aracTeklif.AracIhaleId);
+			
 
 			var yeniAracTeklif = new AracTeklif()
 			{
@@ -66,6 +66,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 				UyeId = aracTeklif.UyeId,
 				TeklifTarihi = DateTime.Now,
 			};
+
+			aracIhale.MinimumAlimFiyati = aracTeklif.TeklifEdilenFiyat;
 
 			_context.AracTeklif.Add(yeniAracTeklif);
 

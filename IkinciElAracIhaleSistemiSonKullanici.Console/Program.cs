@@ -10,6 +10,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Console
 	{
 		static async Task Main(string[] args)
 		{
+			//todo bu katman apiye cikarilir
 			var connectionString = "server=DESKTOP-L9HHG11\\SQLEXPRESS;database=AracIhaleSistemiDB;user id=sa;password=sa;multipleactiveresultsets=true;trustservercertificate=true;";
 			var dbContextOptions = new DbContextOptionsBuilder<AracIhaleContext>()
 				.UseSqlServer(connectionString)

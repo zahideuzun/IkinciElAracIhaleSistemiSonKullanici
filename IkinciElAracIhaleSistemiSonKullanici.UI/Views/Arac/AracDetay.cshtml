@@ -3,8 +3,10 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using IkinciElAracIhaleSistemi.Entities.VM.Enum
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType
+@using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension
 
 @model AracDetayViewModel
+@inject IHttpContextAccessor HttpContextAccessor
 @{
 	ViewData["Title"] = "AracDetay";
 	Layout = "~/Views/Shared/_UiLayout.cshtml";
@@ -38,10 +40,10 @@
 							<div class="col-lg-12 breadcrumbs-custom-path">
 								<input type="hidden" name="AracIhaleId" value="@Model.AracinFiyatBilgisi.AracIhaleId"/>
 								<input type="hidden" name="AracId" value="@Model.AracId" />
-								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Minimum Alım Fiyatı: @Model.AracinFiyatBilgisi.MinimumAlimFiyati TL</li>
+								@*<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Minimum Alım Fiyatı: @Model.AracinFiyatBilgisi.MinimumAlimFiyati TL</li>
 								<hr/>
 								<hr/>
-								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Lütfen minimum alım fiyatının altında teklif vermeyiniz!</li>
+								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Lütfen minimum alım fiyatının altında teklif vermeyiniz!</li>*@
 								<hr/>
 								<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> İhale süreci tamamlandığında ihale sonucunun bilgisi sisteme kayıtlı olduğunuz mail adresiniz üzerinden tarafınıza iletilecektir. </li>
 								<hr/><hr/>
@@ -51,8 +53,8 @@
 						<hr/>
 						<div class="text-center">
 							@{
-								var statu= TempData.Get<IhaleStatuDTO>("ihaleStatu");
-
+								//v/*ar statu= TempData.Get<IhaleStatuDTO>("ihaleStatu");*/
+								var statu = HttpContextAccessor.HttpContext.Session.MySessionGet<IhaleStatuDTO>("ihaleStatu");
 
 								if (statu.StatuId == (int)IhaleStatuleri.Baslamadi && statu.StatuId== (int)IhaleStatuleri.Bitti)
 								{
@@ -75,7 +77,7 @@
 											<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li>
 										</h5>
 										<hr />
-										<input type="text" name="TeklifEdilenFiyat" value="" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;" />
+										<input type="number" name="TeklifEdilenFiyat" value="" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;" />
 									</div>
 									<hr />
 									<h5><li><span style="color: red;"><a href="#"> İHALE AKTİF </a></span></li></h5>

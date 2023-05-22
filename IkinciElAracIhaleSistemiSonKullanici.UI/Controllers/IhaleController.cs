@@ -40,7 +40,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 			var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
 			var idIhaleStatu = await _ihaleProvider.IhaleStatuGetir(id);
 
-			TempData.Put("ihaleStatu", idIhaleStatu);
+			HttpContext.Session.MySessionSet("ihaleStatu", idIhaleStatu);
+			//TempData.Put("ihaleStatu", idIhaleStatu);
 
 			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri, idIhale, idIhaleStatu));
 		}

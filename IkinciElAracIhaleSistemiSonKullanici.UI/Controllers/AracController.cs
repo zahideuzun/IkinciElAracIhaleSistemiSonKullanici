@@ -29,9 +29,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 
 			#region TempData
 
-			TempData.Put("aracId", aracinFiyatBilgisi);
-
-			TempData.Get<IhaleStatuDTO>("ihaleStatu");
+			HttpContext.Session.MySessionSet("aracId", aracinFiyatBilgisi);
+			
 			#endregion
 
 			var model = new AracDetayViewModel
@@ -61,14 +60,17 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 			#endregion
 
 			var sessiondakiUyeBilgisi = HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
-            teklif.UyeId = sessiondakiUyeBilgisi.UyeId;
+			var sessiondakiAracId = HttpContext.Session.MySessionGet<AracIhaleDTO>("aracId");
+
+			int aid = sessiondakiAracId.AracId;
+			teklif.UyeId = sessiondakiUyeBilgisi.UyeId;
 			teklif.TeklifTarihi = DateTime.Now;
             teklif.OnaylandiMi = false;
 
 			var sonuc = await _provider.IhaledekiAracaTeklifVerme(teklif);
 			if (sonuc.IsSuccessful)
 			{
-				return RedirectToAction("Index", "Ihale" /*new { id = aracId }*/);
+				return RedirectToAction("AracDetay", "Arac" , new { id = aid });
 			}
 			ViewBag.HataMesaji = "Teklifiniz kaydedilemedi. Lütfen doğru giriş yaptığınızdan emin olun!";
 			return RedirectToAction("AracDetay", "Arac", new { id = aracId });
