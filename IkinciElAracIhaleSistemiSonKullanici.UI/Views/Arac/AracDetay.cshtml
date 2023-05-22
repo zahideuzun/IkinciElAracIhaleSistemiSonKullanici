@@ -2,6 +2,7 @@
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using IkinciElAracIhaleSistemi.Entities.VM.Enum
+@using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType
 
 @model AracDetayViewModel
 @{
@@ -50,11 +51,10 @@
 						<hr/>
 						<div class="text-center">
 							@{
-								int statuId = int.Parse(Model.BaslangicString);
-								//DateTime bitisTarihi = DateTime.Parse(Model.BitisString);
-								//DateTime bugun = DateTime.Today;
+								var statu= TempData.Get<IhaleStatuDTO>("ihaleStatu");
 
-								if (statuId == (int)IhaleStatuleri.Baslamadi && statuId == (int)IhaleStatuleri.Bitti)
+
+								if (statu.StatuId == (int)IhaleStatuleri.Baslamadi && statu.StatuId== (int)IhaleStatuleri.Bitti)
 								{
 									<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
 										<h5>
@@ -68,7 +68,7 @@
 									<hr/>
 									<button type="button" class="btn btn-style btn-primary">Teklif Girilemez</button>
 								}
-								else if (statuId == (int)IhaleStatuleri.Basladi)
+								else if (statu.StatuId == (int)IhaleStatuleri.Basladi)
 								{
 									<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
 										<h5>

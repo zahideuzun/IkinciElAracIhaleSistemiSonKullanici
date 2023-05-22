@@ -58,7 +58,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
         {
 	        ProviderBase<IhaleStatuDTO> ihale = new ProviderBase<IhaleStatuDTO>(_httpClient);
 
-	        return await ihale.ProviderBaseGetAsync($"Statu");
+	        return await ihale.ProviderBaseGetAsync($"Ihale/Statu/{id}");
 
         }
 

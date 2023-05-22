@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
 using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
 using Microsoft.AspNetCore.Authorization;
@@ -39,8 +40,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 			var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
 			var idIhaleStatu = await _ihaleProvider.IhaleStatuGetir(id);
 
-			TempData["ihaleStatu"] = idIhaleStatu.Statu.StatuId.ToString();
-			
+			TempData.Put("ihaleStatu", idIhaleStatu);
 
 			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri, idIhale, idIhaleStatu));
 		}

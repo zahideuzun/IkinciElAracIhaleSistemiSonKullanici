@@ -37,7 +37,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 					IhaleStatuId = ai.IhaleStatuId,
 					StatuId = ai.StatuId,
 					IhaleId = ai.IhaleId,
-					Tarih = ai.Tarih
+					Tarih = ai.Tarih,
+					Statu = ai.Statu
 
 				}).SingleOrDefaultAsync();
 
@@ -56,7 +57,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 					IhaleStatuId = ai.IhaleStatuId,
 					StatuId = ai.StatuId,
 					IhaleId = ai.IhaleId,
-					Tarih = ai.Tarih
+					Tarih = ai.Tarih,
+					Statu = ai.Statu
 
 				}).ToListAsync();
 

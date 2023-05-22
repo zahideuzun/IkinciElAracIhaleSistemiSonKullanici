@@ -55,13 +55,16 @@ namespace IkinciElAracIhaleSistemiSonKullanici.DAL.Repositories.Derived
 			//	return new ErrorResult(validationErrors);
 			//}
 
+			//var aracIhale = _context.AracIhale.SingleOrDefault(a => a.Id == aracTeklif.AracIhaleId);
+
+
 			var yeniAracTeklif = new AracTeklif()
 			{
 				AracIhaleId = aracTeklif.AracIhaleId,
 				TeklifEdilenFiyat = aracTeklif.TeklifEdilenFiyat,
 				OnaylandiMi = false,
 				UyeId = aracTeklif.UyeId,
-				TeklifTarihi = DateTime.Now
+				TeklifTarihi = DateTime.Now,
 			};
 
 			_context.AracTeklif.Add(yeniAracTeklif);

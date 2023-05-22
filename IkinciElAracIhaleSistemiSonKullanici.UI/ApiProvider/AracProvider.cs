@@ -27,7 +27,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 		public async Task<List<AracTeklifDTO>?> IhaledekiAracTeklifleriniGetir(int aracId)
 		{
 			List<AracTeklifDTO>? listem = null;
-			var responseMessage = await _httpClient.GetAsync($"Arac/AracIhaleTeklif/{aracId}");
+			var responseMessage = await _httpClient.GetAsync($"Arac/AracIhaleTeklifleri/{aracId}");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				listem = JsonConvert.DeserializeObject<List<AracTeklifDTO>>(await responseMessage.Content.ReadAsStringAsync());
@@ -47,7 +47,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 		{
 			ProviderBase<AracTeklifDTO> teklifBilgisi = new ProviderBase<AracTeklifDTO>(_httpClient);
 			
-			return await teklifBilgisi.ProviderBasePostAsync<Result>($"Arac/AracIhaleTeklif", teklif);
+			return await teklifBilgisi.ProviderBasePostAsync<Result>("Arac/AracIhaleTeklif", teklif);
 
 		}
 

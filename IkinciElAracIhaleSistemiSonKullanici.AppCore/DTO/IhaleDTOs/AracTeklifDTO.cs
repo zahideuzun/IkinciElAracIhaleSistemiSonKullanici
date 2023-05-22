@@ -9,6 +9,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 		public decimal TeklifEdilenFiyat { get; set; }
 		public DateTime TeklifTarihi { get; set; }
 		public bool OnaylandiMi { get; set; }
-		public AracIhaleDTO AracIhale { get; set; }
+
 	}
 }

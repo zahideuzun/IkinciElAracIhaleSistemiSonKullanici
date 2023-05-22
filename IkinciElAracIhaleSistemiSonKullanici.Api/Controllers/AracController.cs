@@ -43,6 +43,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 			return BaseActionType.ReturnResponse(ihale);
 		}
 
+
 		[HttpPost("AracIhaleTeklif")]
 		public async Task<IActionResult> IhaledekiAracaTeklifVer([FromBody] AracTeklifDTO teklif)
 		{
@@ -51,7 +52,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
 			return BaseActionType.ReturnResponse(teklifResult);
 		}
 
-		[HttpGet("AracIhaleTeklif/{aracId}")]
+		[HttpGet("AracIhaleTeklifleri/{aracId}")]
 		public async Task<IActionResult> IhaledekiAracTeklifBilgileri(int aracId)
 		{
 			var ihale = await _aracTeklifManager.AracaVerilenTeklifleriGetir(aracId);

@@ -13,10 +13,10 @@ namespace IkinciElAracIhaleSistemiSonKullanici.BLL.Concrate
 {
 	public class IhaleStatuManager : IIhaleStatuManager
 	{
-		private readonly IIhaleStatuManager _repository;
+		private readonly IIhaleStatuRepository _repository;
 		private readonly IMapper _mapper;
 
-		public IhaleStatuManager(IIhaleStatuManager repository, IMapper mapper)
+		public IhaleStatuManager(IIhaleStatuRepository repository, IMapper mapper)
 		{
 			_mapper = mapper;
 			_repository = repository;

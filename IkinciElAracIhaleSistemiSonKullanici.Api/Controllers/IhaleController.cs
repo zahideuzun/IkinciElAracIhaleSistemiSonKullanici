@@ -32,7 +32,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
             var ihale = await _ihaleManager.IdyeGoreIhaleGetir(id);
 			return BaseActionType.ReturnResponse(ihale);
 		}
-        [HttpGet("Statu")]
+        [HttpGet("Statu/{Id}")]
         public async Task<IActionResult> IhaleStatu(int id)
         {
 	        var ihale = await _ihaleStatuManager.IhaleIdyeGoreIhaleStatuGetir(id);

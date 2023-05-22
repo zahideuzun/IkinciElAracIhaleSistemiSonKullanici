@@ -1,4 +1,5 @@
-﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.BaseType;
+using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
 using IkinciElAracIhaleSistemiSonKullanici.UI.Models;
@@ -18,11 +19,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 		{
 			_provider = provider;
 		}
-		public IActionResult Index()
-		{
-			return View();
-		}
-
+		
 		[HttpGet]
 		public async Task<IActionResult> AracDetay(int id)
 		{
@@ -32,15 +29,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 
 			#region TempData
 
-			string statuString = null;
-			//string bitisString = null;
-			if (TempData.ContainsKey("ihaleStatu"))
-			{
-				string ihaleBaslangic = TempData["ihaleStatu"] as string;
-				statuString = ihaleBaslangic;
-				
-			}
-			TempData["AracId"] = aracinFiyatBilgisi.AracId.ToString();
+			TempData.Put("aracId", aracinFiyatBilgisi);
+
+			TempData.Get<IhaleStatuDTO>("ihaleStatu");
 			#endregion
 
 			var model = new AracDetayViewModel
@@ -49,8 +40,6 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 				AracinFiyatBilgisi = aracinFiyatBilgisi,
 				AracId = aracinFiyatBilgisi.AracId,
 				AracTeklifleri = aracinTeklifleri,
-				BaslangicString = statuString,
-				//BitisString = bitisString
 			};
 			
 
@@ -79,8 +68,7 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 			var sonuc = await _provider.IhaledekiAracaTeklifVerme(teklif);
 			if (sonuc.IsSuccessful)
 			{
-				ViewBag.HataMesaji = "Teklifiniz kaydedilemedi. Lütfen doğru giriş yaptığınızdan emin olun!";
-				return RedirectToAction("AracDetay", "Arac", new { id = aracId });
+				return RedirectToAction("Index", "Ihale" /*new { id = aracId }*/);
 			}
 			ViewBag.HataMesaji = "Teklifiniz kaydedilemedi. Lütfen doğru giriş yaptığınızdan emin olun!";
 			return RedirectToAction("AracDetay", "Arac", new { id = aracId });
