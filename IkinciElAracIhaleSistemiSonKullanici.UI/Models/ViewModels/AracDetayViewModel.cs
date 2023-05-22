@@ -10,6 +10,5 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Models
 		public int AracId { get; set; }
 		public List<AracTeklifDTO>? AracTeklifleri { get; internal set; }
 		public string BaslangicString { get; set; }
-		public string? BitisString { get; internal set; }
 	}
 }

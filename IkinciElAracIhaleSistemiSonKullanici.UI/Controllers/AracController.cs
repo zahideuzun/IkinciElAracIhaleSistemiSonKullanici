@@ -32,15 +32,13 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 
 			#region TempData
 
-			string baslangicString = null;
-			string bitisString = null;
-			if (TempData.ContainsKey("ihaleBaslangic") && TempData.ContainsKey("ihaleBitis"))
+			string statuString = null;
+			//string bitisString = null;
+			if (TempData.ContainsKey("ihaleStatu"))
 			{
-				string ihaleBaslangic = TempData["ihaleBaslangic"] as string;
-				string ihaleBitis = TempData["ihaleBitis"] as string;
-
-				baslangicString = ihaleBaslangic;
-				bitisString = ihaleBitis;
+				string ihaleBaslangic = TempData["ihaleStatu"] as string;
+				statuString = ihaleBaslangic;
+				
 			}
 			TempData["AracId"] = aracinFiyatBilgisi.AracId.ToString();
 			#endregion
@@ -51,8 +49,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 				AracinFiyatBilgisi = aracinFiyatBilgisi,
 				AracId = aracinFiyatBilgisi.AracId,
 				AracTeklifleri = aracinTeklifleri,
-				BaslangicString = baslangicString,
-				BitisString = bitisString
+				BaslangicString = statuString,
+				//BitisString = bitisString
 			};
 			
 

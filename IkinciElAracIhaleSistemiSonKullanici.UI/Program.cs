@@ -80,6 +80,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI
 			builder.Services.AddScoped<IAracTeklifRepository, AracTeklifRepository>();
 			builder.Services.AddScoped<ISayfaManager, SayfaManager>();
 			builder.Services.AddScoped<ISayfaRepository, SayfaRepository>();
+			builder.Services.AddScoped<IIhaleStatuManager, IhaleStatuManager>();
+			builder.Services.AddScoped<IIhaleStatuRepository, IhaleStatuRepository>();
 
 			#endregion
 

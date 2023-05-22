@@ -1,6 +1,7 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs.AracOzellikDTOs
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using IkinciElAracIhaleSistemi.Entities.VM.Enum
 
 @model AracDetayViewModel
 @{
@@ -49,15 +50,15 @@
 						<hr/>
 						<div class="text-center">
 							@{
-								DateTime baslangicTarihi = DateTime.Parse(Model.BaslangicString);
-								DateTime bitisTarihi = DateTime.Parse(Model.BitisString);
-								DateTime bugun = DateTime.Today;
+								int statuId = int.Parse(Model.BaslangicString);
+								//DateTime bitisTarihi = DateTime.Parse(Model.BitisString);
+								//DateTime bugun = DateTime.Today;
 
-								if (baslangicTarihi < bugun && bitisTarihi < bugun)
+								if (statuId == (int)IhaleStatuleri.Baslamadi && statuId == (int)IhaleStatuleri.Bitti)
 								{
 									<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
 										<h5>
-											<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Teklif Edilen Fiyat: </li> </h5>
+											<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Teklif Girilemez</li> </h5>
 										<hr/>
 										<input type="text" name="TeklifEdilenFiyat" value="" placeholder="Teklif Edilen Fiyat*" class="contact-input form-control-lg" style="width: 100%;" disabled/>
 									</div>
@@ -67,7 +68,7 @@
 									<hr/>
 									<button type="button" class="btn btn-style btn-primary">Teklif Girilemez</button>
 								}
-								else if (bitisTarihi > bugun && baslangicTarihi <= bugun)
+								else if (statuId == (int)IhaleStatuleri.Basladi)
 								{
 									<div class="col-lg-12 breadcrumbs-custom-path breadcrumb-bg breadcrumb-bg-about">
 										<h5>
@@ -87,18 +88,20 @@
 					</form>
 					<hr />
 						
-					@if (Model.AracTeklifleri.Count > 0)
-					{
-						<div class="column price-number text-md-right">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-								Teklifler
-							</button>
+					@{
+						if (Model.AracTeklifleri.Count > 0)
+						{
+							<div class="column price-number text-md-right">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+									Teklifler
+								</button>
 										
-						</div>
-					}
-					else
-					{
-						<p class="price-title">Araca ait teklif yoktur.</p>
+							</div>
+						}
+						else
+						{
+							<p class="price-title">Araca ait teklif yoktur.</p>
+						}
 					}
 				</div>
 			</div>
@@ -116,7 +119,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Araca Yapılan Teklifler</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -148,7 +151,6 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
 			</div>
 		</div>
 	</div>
@@ -194,6 +196,9 @@
 		</div>
 	</div>
 </div>
+
+
+
 <section class="w3l-contact" id="contact">
 	<div class="contact-infubd py-5">
 		<div class="container py-lg-3">

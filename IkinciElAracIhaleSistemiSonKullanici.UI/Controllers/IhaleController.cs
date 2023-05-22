@@ -1,11 +1,8 @@
-﻿using IkinciElAracIhaleSistemi.Entities.VM.Enum;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs;
-using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.UyeDTOs;
 using IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider;
 using IkinciElAracIhaleSistemiSonKullanici.UI.Models.Extension;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 {
@@ -23,7 +20,9 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 		{
 			var sessiondakiUyeBilgisi = HttpContext.Session.MySessionGet<UyeSessionDTO>("girisYapanUye");
 			var ihaleler = await _ihaleProvider.IhaleListesiniGetir(sessiondakiUyeBilgisi.UyeTuruId);
-			return View(ihaleler);
+			var ihaleStatuleri = await _ihaleProvider.IhaleStatuleriniGetir();
+
+			return View(Tuple.Create(ihaleler, ihaleStatuleri));
 		}
 		[HttpGet]
 		public async Task<IActionResult> KurumsalIhale()
@@ -38,11 +37,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.Controllers
 			var idIhale = await _ihaleProvider.IdyeGoreIhaleGetir(id);
 			var ihaledekiAracFiyatBilgileri = await _ihaleProvider.IhaleIdyeGoreAracFiyatlariniGetir(id);
 			var ihaledekiAraclar = await _ihaleProvider.IhaledekiAraclariGetir(id);
+			var idIhaleStatu = await _ihaleProvider.IhaleStatuGetir(id);
 
-			TempData["ihaleBaslangic"] = idIhale.IhaleBaslangicTarihi.ToString();
-			TempData["ihaleBitis"] = idIhale.IhaleBitisTarihi.ToString();
+			TempData["ihaleStatu"] = idIhaleStatu.Statu.StatuId.ToString();
+			
 
-			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri, idIhale));
+			return View(Tuple.Create(ihaledekiAraclar, ihaledekiAracFiyatBilgileri, idIhale, idIhaleStatu));
 		}
 
 

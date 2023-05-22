@@ -1,8 +1,9 @@
 ﻿@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.AracDTOs
 @using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
+@using IkinciElAracIhaleSistemi.Entities.VM.Enum
 
 
-@model Tuple<List<AracBilgiDTO>,List<AracIhaleDTO>, IhaleBilgisiDTO>
+@model Tuple<List<AracBilgiDTO>,List<AracIhaleDTO>, IhaleBilgisiDTO, IhaleStatuDTO>
 
 @{
     ViewData["Title"] = "IhaleDetay";
@@ -15,26 +16,27 @@
 			<h2 class="title">@Model.Item3.IhaleAdi</h2>
 			<ul class="breadcrumbs-custom-path mt-2">
 				<h5>
+				<li><a href="#"> @Model.Item4.Statu.StatuAdi </a></li>
 					@{
-						if ((Model.Item3.IhaleBaslangicTarihi < DateTime.Now)&& (Model.Item3.IhaleBitisTarihi > DateTime.Now))
-						{
-							<li><a href="#"> Başladı </a></li>
-						
-						}
-						else if ((DateTime.Now < Model.Item3.IhaleBaslangicTarihi))
-						{
-							<li><a href="#"> Başlamadı </a></li>
-						}
-						else if (Model.Item3.IhaleBitisTarihi < DateTime.Now)
-						{
-							<li><a href="#"> Bitti </a></li>
-						}
+						//if ((Model.Item3.IhaleBaslangicTarihi < DateTime.Now)&& (Model.Item3.IhaleBitisTarihi > DateTime.Now))
+						//{
+						//	<li><a href="#"> Başladı </a></li>
+
+						//}
+						//else if ((DateTime.Now < Model.Item3.IhaleBaslangicTarihi))
+						//{
+						//	<li><a href="#"> Başlamadı </a></li>
+						//}
+						//else if (Model.Item3.IhaleBitisTarihi < DateTime.Now)
+						//{
+						//	<li><a href="#"> Bitti </a></li>
+						//}
 					}
 
 				</h5>
 				
 				<hr/>
-				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @Model.Item3.IhaleBaslangicTarihi.ToShortDateString() -> 18:20 </li>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Başlangıç Tarihi: @Model.Item3.IhaleBaslangicTarihi.ToShortDateString() -> @Model.Item3.BaslangicSaati.ToString()</li>
 				<hr/>
 				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Bitiş Tarihi: @Model.Item3.IhaleBitisTarihi.ToShortDateString() -> 20:00 </li>
 			</ul>
@@ -70,27 +72,15 @@
 
 							</div>
 							<div class="column pr-img-gd text-lg-center">
-								@if (Model.Item3.IhaleBaslangicTarihi < DateTime.Now && Model.Item3.IhaleBitisTarihi < DateTime.Now)
+								@if (@Model.Item4.StatuId == (int)IhaleStatuleri.Baslamadi
+										&& Model.Item4.StatuId == (int)IhaleStatuleri.Bitti)
 								{
-									<div class="column price-number text-md-center">
-				                
-										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Detay</a>
-									</div>
+									<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Detay</a>
 								}
-								@if ((DateTime.Now < Model.Item3.IhaleBitisTarihi) && (Model.Item3.IhaleBaslangicTarihi < DateTime.Now))
+								@if (Model.Item4.StatuId== (int)IhaleStatuleri.Basladi)
 								{
-									<div class="column price-number text-md-center">
-
-										<a class="btn btn-style btn btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
-									</div>
+									<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Teklif Ver</a>
 								}
-								@*@if (Model.Item3.IhaleBitisTarihi < DateTime.Now)
-								{
-									<div class="column price-number text-md-center">
-
-										<a class="btn btn-style btn-primary ml-lg-3" href="/Arac/AracDetay/@item.Id/">Detay</a>
-									</div>
-								}*@
 
 							</div>
 			               

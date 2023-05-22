@@ -23,6 +23,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
 
             builder.Services.AddDbContext<AracIhaleContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("ConnSt")));
 
+
+			//todo test 3 ihale arac teklifi kontrol? 
+			//todo refac yap iki projeye de
+			//todo ihale durumlarini timer ile guncelle? 
+
+
 			#region MappingConfiguration
 
 			builder.Services.AddAutoMapper(typeof(Program));
@@ -52,6 +58,8 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
 			builder.Services.AddScoped<ISayfaRepository, SayfaRepository>();
 			builder.Services.AddScoped<IOzellikDetayRepository, OzellikDetayRepository>();
 			builder.Services.AddScoped<IOzellikDetayManager, OzellikDetayManager>();
+			builder.Services.AddScoped<IIhaleStatuManager, IhaleStatuManager>();
+			builder.Services.AddScoped<IIhaleStatuRepository, IhaleStatuRepository>();
 			
 
             #endregion
@@ -69,6 +77,11 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api
 			{
 				a.SwaggerDoc("v1", new OpenApiInfo() { Title = "AracIhale", Version = "v1" });
 			});
+
+			#endregion
+
+
+			#region Timer
 
 			#endregion
 

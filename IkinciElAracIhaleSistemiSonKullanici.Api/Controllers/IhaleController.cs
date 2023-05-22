@@ -11,10 +11,12 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
     {
         private readonly IIhaleManager _ihaleManager;
         private readonly IAracIhaleManager _aracIhaleManager;
-		public IhaleController(IIhaleManager ihaleManager, IAracIhaleManager aracIhaleManager)
+        private readonly IIhaleStatuManager _ihaleStatuManager;
+		public IhaleController(IIhaleManager ihaleManager, IAracIhaleManager aracIhaleManager, IIhaleStatuManager ihaleStatuManager)
         {
             _ihaleManager = ihaleManager;
             _aracIhaleManager = aracIhaleManager;
+			_ihaleStatuManager = ihaleStatuManager;
         }
 
         [HttpGet("Index")]
@@ -30,6 +32,19 @@ namespace IkinciElAracIhaleSistemiSonKullanici.Api.Controllers
             var ihale = await _ihaleManager.IdyeGoreIhaleGetir(id);
 			return BaseActionType.ReturnResponse(ihale);
 		}
+        [HttpGet("Statu")]
+        public async Task<IActionResult> IhaleStatu(int id)
+        {
+	        var ihale = await _ihaleStatuManager.IhaleIdyeGoreIhaleStatuGetir(id);
+	        return BaseActionType.ReturnResponse(ihale);
+        }
+        [HttpGet("StatuIndex")]
+        public async Task<IActionResult> IhaleStatuGet()
+        {
+	        var ihaleListesi = await _ihaleStatuManager.IhaleStatuGetir();
+	        return BaseActionType.ReturnResponse(ihaleListesi);
+        }
+
 
 		[HttpGet("AracIhaleFiyat/{ihaleId}")]
 		public async Task<IActionResult> IhaledekiAracFiyatBilgileri(int ihaleId)

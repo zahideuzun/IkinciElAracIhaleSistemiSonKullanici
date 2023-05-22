@@ -1,4 +1,6 @@
-﻿namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
+﻿using IkinciElAracIhaleSistemi.Entities.Entities;
+
+namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
 	public class IhaleBilgisiDTO
     {
@@ -9,8 +11,8 @@
         public DateTime IhaleBitisTarihi { get; set; }
         public TimeSpan BaslangicSaati { get; set; }
         public TimeSpan BitisSaati { get; set; }
-        public IhaleStatuDTO Statu { get; set; }
-        public IhaleTuruDTO IhaleTuru { get; set; }
+		public ICollection<IhaleStatuDTO> IhaleStatu { get; set; }
+		public IhaleTuruDTO IhaleTuru { get; set; }
 
     }
 }

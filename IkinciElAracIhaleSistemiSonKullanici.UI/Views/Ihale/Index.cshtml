@@ -1,9 +1,12 @@
-﻿@model List<IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs.IhaleBilgisiDTO>
+﻿
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UiLayout.cshtml";
 }
+@using Microsoft.CodeAnalysis.Elfie.Model.Map
+@using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 
+@model Tuple< List<IhaleBilgisiDTO>, List<IhaleStatuDTO>>
 <section class="w3l-grids-3 py-5">
     <div class="container py-md-5">
         <div class="title-content text-left mb-lg-5 mb-4">
@@ -12,7 +15,7 @@
         </div>
         <div class="row bottom-ab-grids">
 	        <!--/row-grids-->
-            @foreach (var item in Model)
+            @foreach (var item in Model.Item1)
             {
 	            <div class="col-lg-6 subject-card mt-lg-0 mt-4">
 		            <div class="subject-card-header p-4">
@@ -23,13 +26,20 @@
 					            </div>
 					            <div class="col-sm-7 subject-content mt-sm-0 mt-4">
 						            <h4>@item.IhaleAdi</h4>
-						            <p>@item.Statu</p>
+									@foreach (var item1 in Model.Item2)
+									{
+										if (item.IhaleId == item1.IhaleId)
+										{
+											<p>@item1.Statu.StatuAdi</p>
+										}
+									}
+						            
 						            <div class="dst-btm">
-							            <h6 class=""> @(item.IhaleTuru.IhaleTuruAdi+" İhale") </h6>
+							            @*<h6 class=""> @(item.IhaleTuru.IhaleTuruAdi+" İhale") </h6>*@
 										<span>@(item.IhaleTuru.IhaleTuruAdi + " İhale")</span>
 						            </div>
-						            <p class="sub-para">@item.IhaleBaslangicTarihi.ToShortDateString()</p>
-									<p class="sub-para">@item.IhaleBitisTarihi.ToShortDateString()</p>
+						            <p class="sub-para">Başlangıç: @item.IhaleBaslangicTarihi.ToShortDateString()+ </p>
+									<p class="sub-para">Bitiş: @item.IhaleBitisTarihi.ToShortDateString()</p>
 					            </div>
 				            </div>
 			            </a>

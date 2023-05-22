@@ -1,4 +1,6 @@
-﻿namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
+﻿using IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.StatuDTOs;
+
+namespace IkinciElAracIhaleSistemiSonKullanici.AppCore.DTO.IhaleDTOs
 {
 	public class IhaleStatuDTO
 	{
@@ -6,5 +8,6 @@
 		public DateTime Tarih { get; set; }
 		public int IhaleId { get; set; }
 		public int StatuId { get; set; }
+		public StatuDTO Statu { get; set; }
 	}
 }

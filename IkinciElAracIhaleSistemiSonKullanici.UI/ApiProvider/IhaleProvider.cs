@@ -53,7 +53,16 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 	       return await ihale.ProviderBaseGetAsync($"Ihale/{id}");
 
         }
-        public async Task<List<AracBilgiDTO>?> IhaledekiAraclariGetir(int ihaleId)
+
+        public async Task<IhaleStatuDTO?> IhaleStatuGetir(int id)
+        {
+	        ProviderBase<IhaleStatuDTO> ihale = new ProviderBase<IhaleStatuDTO>(_httpClient);
+
+	        return await ihale.ProviderBaseGetAsync($"Statu");
+
+        }
+
+		public async Task<List<AracBilgiDTO>?> IhaledekiAraclariGetir(int ihaleId)
         {
 	        List<AracBilgiDTO>? listem = null;
 	        var responseMessage = await _httpClient.GetAsync($"Arac/IhaleAraclar/{ihaleId}");
@@ -64,7 +73,19 @@ namespace IkinciElAracIhaleSistemiSonKullanici.UI.ApiProvider
 
 	        return listem;
         }
-        public async Task<List<AracIhaleDTO?>> IhaleIdyeGoreAracFiyatlariniGetir(int ihaleId)
+
+		public async Task<List<IhaleStatuDTO>?> IhaleStatuleriniGetir()
+		{
+			List<IhaleStatuDTO>? listem = null;
+			var responseMessage = await _httpClient.GetAsync($"Ihale/StatuIndex");
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				listem = JsonConvert.DeserializeObject<List<IhaleStatuDTO>>(await responseMessage.Content.ReadAsStringAsync());
+			}
+
+			return listem;
+		}
+		public async Task<List<AracIhaleDTO?>> IhaleIdyeGoreAracFiyatlariniGetir(int ihaleId)
         {
 	        List<AracIhaleDTO>? listem = null;
 	        var responseMessage = await _httpClient.GetAsync($"Ihale/AracIhaleFiyat/{ihaleId}");
