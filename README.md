@@ -1,3 +1,3 @@
 # IkinciElAracIhaleSistemiSonKullanici
 
-.Net Core Mvc son kullanıcı paneli 
+.net core mvc web api son kullanıcı paneli 
